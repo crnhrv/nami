@@ -1,25 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import HeaderContainer from './containers/header';
+import FormContainer from './containers/form';
+import GameContainer from './containers/game';
+import { Switch, Route } from 'react-router-dom';
+import { settingsContext } from './contexts/settings';
+import { useState } from 'react';
 
-function App() {
+const App = () => {
+  const [rounds, setRounds] = useState(10);
+  const [pitchNotation, setPitchNotation] = useState('numericFree');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <settingsContext.Provider
+      value={{ rounds, setRounds, pitchNotation, setPitchNotation }}
+    >
+      <HeaderContainer />
+      <Switch>
+        <Route exact path="/">
+          <FormContainer />
+        </Route>
+        <Route path="/play">
+          <GameContainer />
+        </Route>
+      </Switch>
+    </settingsContext.Provider>
   );
-}
-
+};
 export default App;
