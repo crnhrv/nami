@@ -9,7 +9,7 @@ import { useState } from 'react';
 const App = () => {
   const [rounds, setRounds] = useState(10);
   const [pitchNotation, setPitchNotation] = useState('numericFree');
-
+  console.log('render');
   return (
     <settingsContext.Provider
       value={{ rounds, setRounds, pitchNotation, setPitchNotation }}

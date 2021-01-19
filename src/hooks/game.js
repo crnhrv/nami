@@ -47,15 +47,21 @@ const useGame = () => {
 
   useEffect(() => {
     if (!rounds) {
+      console.log('SETTING ROUNDS');
       setRounds(startingRounds);
     }
-
+    console.log('GETTING DATA');
     setLoading();
-    getJSONData('dict.json')
-      .then((data) => randomSample(data, rounds))
-      .then((objects) => objects.map((o) => createAudio(o)))
-      .then((audio) => initWordBank(audio));
-  }, [rounds]);
+    if (wordBank.length === 0) {
+      getJSONData('dict.json')
+        .then((data) => randomSample(data, rounds))
+        .then((objects) => objects.map((o) => createAudio(o)))
+        .then((audio) => initWordBank(audio));
+    }
+  }, [rounds, wordBank]);
+
+  console.log(rounds);
+  console.log(wordBank);
 
   return {
     setRounds,

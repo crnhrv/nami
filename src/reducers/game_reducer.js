@@ -37,6 +37,7 @@ export const gameReducer = (state = initialState, action) => {
         startTimer: 3,
         currentRound: 0,
         rounds: 0,
+        wordBank: [],
       };
     }
     case 'NEW_QUESTION': {
