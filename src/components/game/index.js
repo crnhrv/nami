@@ -79,7 +79,7 @@ Game.Choices = function GameChoices({
     if (notation === 'numericFree') {
       focusRef.current.focus();
     }
-  }, [input]);
+  }, [input, notation]);
 
   const handleMulti = (gata) => {
     if ((gata === '平板' && pitch === 0) || (gata === '頭高' && pitch === 1)) {

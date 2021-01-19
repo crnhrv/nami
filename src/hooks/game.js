@@ -56,7 +56,7 @@ const useGame = () => {
         .then((objects) => objects.map((o) => createAudio(o)))
         .then((audio) => initWordBank(audio));
     }
-  }, [rounds, wordBank]);
+  }, [rounds, wordBank, startingRounds]);
 
   return {
     setRounds,
