@@ -24,7 +24,9 @@ const GameContainer = ({ children }) => {
   } = useGame();
 
   useEffect(() => {
-    setTimeout(() => decrementStartTimer(), 1000);
+    if (!loading) {
+      setTimeout(() => decrementStartTimer(), 1000);
+    }
   }, [startTimer]);
 
   useEffect(() => {
