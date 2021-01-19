@@ -13,6 +13,7 @@ import {
   Form,
   Text,
   AccentText,
+  VictoryText,
   Item,
   Title,
 } from './styles/game';
@@ -116,7 +117,7 @@ Game.Choices = function GameChoices({
             value={input}
             onChange={handleChange}
           />
-          <Button type="submit">Submit Answer</Button>
+          <Button type="submit">Submit</Button>
         </Form>
       );
       break;
@@ -167,7 +168,7 @@ Game.GameOver = function GameOver({
       return (
         <Item key={word.url}>
           <AccentText>Round {words.length - idx}:</AccentText>
-          <Text passed={word.passed}>{word.kanji}</Text>
+          <VictoryText passed={word.passed}>{word.kanji}</VictoryText>
         </Item>
       );
     })
@@ -180,6 +181,10 @@ Game.GameOver = function GameOver({
       <Button onClick={handleClick}>Play Again?</Button>
     </Container>
   );
+};
+
+Game.Text = function GameText({ children, ...restProps }) {
+  return <Text {...restProps}>{children}</Text>;
 };
 
 export default Game;

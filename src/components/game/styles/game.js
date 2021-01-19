@@ -84,7 +84,7 @@ export const PlayButton = styled.button`
   height: 0;
   border-style: solid;
   border-width: 20px 0 20px 50px;
-  border-color: transparent transparent transparent #021121;
+  border-color: transparent transparent transparent ${colors.shadow};
   background-color: ${colors.shadow};
   border-style: inset;
   cursor: pointer;
@@ -94,7 +94,7 @@ export const PlayButton = styled.button`
   }
 
   &:hover {
-    background-color: ${colors.accent};
+    border-color: transparent transparent transparent ${colors.light};
   }
 `;
 
@@ -139,13 +139,20 @@ export const Form = styled.form`
   gap: 10px;
 `;
 
-export const Text = styled.p`
+export const VictoryText = styled.p`
   margin: 0;
   font-size: 1.5em;
   text-align: left;
   padding: 0;
   width: auto;
   color: ${(props) => (props.passed ? '#11C141' : 'crimson')};
+`;
+
+export const Text = styled.p`
+  margin: 0;
+  padding: 0;
+  font-size: 1.2em;
+  text-align: center;
 `;
 
 export const Item = styled.div`

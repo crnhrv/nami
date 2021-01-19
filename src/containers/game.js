@@ -8,6 +8,8 @@ const GameContainer = ({ children }) => {
     score,
     loading,
     currentWord,
+    currentRound,
+    rounds,
     incrementScore,
     pitchNotation,
     decrementStartTimer,
@@ -52,7 +54,12 @@ const GameContainer = ({ children }) => {
       ) : currentWord?.url ? (
         <Game>
           {/* <Game.TitleInfo roundOver={roundOver} correct={correctAnswer} ></Game.TitleInfo> */}
-          <Game.Score>Score: {score}</Game.Score>
+          <Game.Score>
+            <Game.Text>
+              Round: {currentRound} / {rounds}
+            </Game.Text>
+            <Game.Text>Score: {score}</Game.Text>
+          </Game.Score>
           <Game.Audio controls audio={currentWord.audio} />
           <Game.Choices
             notation={pitchNotation}
