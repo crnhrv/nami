@@ -1,16 +1,17 @@
 import json
 import requests
+import time
+from threading import Thread
 
-
-def determine_pitch_type(pitch, mora):
-    if pitch == 0:
-        return "平板"
-    elif pitch == 1 and mora > 1:
-        return "頭高"
-    elif pitch == mora:
-        return "尾高"
-    else:
-        return "中高"
+# def determine_pitch_type(pitch, mora):
+#     if pitch == 0:
+#         return "平板"
+#     elif pitch == 1 and mora > 1:
+#         return "頭高"
+#     elif pitch == mora:
+#         return "尾高"
+#     else:
+#         return "中高"
 
 
 class JavaScriptObject:
@@ -18,11 +19,10 @@ class JavaScriptObject:
         self.kanji = kanji
         self.kana = kana
         self.pitch = pitch
-        self.pitch_type = pitch_type or determine_pitch_type(
-            int(self.pitch), len(self.kana))
+        self.pitch_type = pitch_type
         self.url = url
         self.status_code = None
-        self.valid = True
+        self.valid = False
 
     def __str__(self):
         return f"kanji: {self.kanji}, kana: {self.kana}, pitch: {self.pitch}, type: {self.pitch_type}"
@@ -30,10 +30,13 @@ class JavaScriptObject:
     def check_valid_url(self):
         response = requests.head(self.url)
         if response.status_code != 200:
-            print(response.status_code)
             self.status_code = response.status_code
+            print(response.status_code)
+            return
         if response.headers["Content-length"] == "52288":
             self.valid = False
+        else:
+            self.valid = True
 
 
 objects = []
@@ -42,18 +45,41 @@ with open("./dict_parsed.json", 'r', encoding="utf-8") as f:
     data = json.load(f)
 
 for line in data:
+    if line['status_code']:
+        continue
+    if not line['valid']:
+        continue
     obj = JavaScriptObject(
         line['kanji'], line['kana'], line['pitch'], line['url'], line['pitch_type'])
     objects.append(obj)
 
 
-for i in objects:
-    i.check_valid_url()
+def threaded(arr, offset=0, amount=1000):
+    counter = 0
+    arr = arr[offset:offset + amount]
+    for i in arr:
+        i.check_valid_url()
+        counter += 1
+        print(counter)
+
+
+amount = len(objects) // 10
+
+threads = [Thread(target=threaded, args=(objects, amount * i, amount))
+           for i in range(0, 10)]
+
+for thread in threads:
+    thread.start()
+
+[thread.join() for thread in threads]
 
 objects = [word for word in objects if word.valid]
 
 with open('./validated_dict.json', 'w', encoding="utf-8") as f:
     json.dump(objects, fp=f, default=vars, indent=2)
+
+
+# Parser for the previous dict format
 
     # for line in data:
     #     word = json.loads(line)
