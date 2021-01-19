@@ -47,11 +47,8 @@ const useGame = () => {
 
   useEffect(() => {
     if (!rounds) {
-      console.log('SETTING ROUNDS');
       setRounds(startingRounds);
     }
-
-    console.log('GETTING DATA');
 
     setLoading();
     getJSONData('dict.json')
@@ -59,8 +56,6 @@ const useGame = () => {
       .then((objects) => objects.map((o) => createAudio(o)))
       .then((audio) => initWordBank(audio));
   }, [rounds]);
-
-  console.log(pitchNotation);
 
   return {
     setRounds,

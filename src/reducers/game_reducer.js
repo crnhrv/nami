@@ -40,7 +40,6 @@ export const gameReducer = (state = initialState, action) => {
       };
     }
     case 'NEW_QUESTION': {
-      console.log(state.currentRound, state.rounds);
       if (state.currentRound === state.rounds - 1) {
         return { ...state, loading: false, gameOver: true, currentWord: null };
       }
