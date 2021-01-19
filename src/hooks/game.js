@@ -46,11 +46,14 @@ const useGame = () => {
   const failedQuestion = () => dispatch({ type: 'FAILED_QUESTION' });
 
   useEffect(() => {
-    if (!rounds) {
-      setRounds(startingRounds);
+    if (wordBank.length > 0) {
+      setLoading(false);
     }
+  }, [wordBank, loading]);
 
+  useEffect(() => {
     if (wordBank.length === 0) {
+      console.log('SETTING LOADING TRUE');
       setLoading(true);
       getJSONData('dict.json')
         .then((data) => randomSample(data, rounds))
@@ -59,7 +62,7 @@ const useGame = () => {
           initWordBank(audio);
         });
     }
-  }, [rounds, wordBank, startingRounds]);
+  }, [wordBank, rounds]);
 
   return {
     setRounds,

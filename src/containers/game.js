@@ -22,10 +22,10 @@ const GameContainer = ({ children }) => {
   } = useGame();
 
   useEffect(() => {
-    if (startTimer > 0) {
+    if (wordBank.length > 0 && startTimer > 0) {
       setTimeout(() => decrementStartTimer(), 1000);
     }
-  }, [startTimer]);
+  }, [startTimer, wordBank]);
 
   useEffect(() => {
     if (roundOver) {

@@ -37,7 +37,6 @@ export const gameReducer = (state = initialState, action) => {
         startTimer: 3,
         score: 0,
         currentRound: 0,
-        rounds: 0,
         wordBank: [],
       };
     }
@@ -98,6 +97,7 @@ export const gameReducer = (state = initialState, action) => {
         return {
           ...state,
           startTimer: state.startTimer - 1,
+          loading: false,
         };
       }
     }
