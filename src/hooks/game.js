@@ -49,14 +49,14 @@ const useGame = () => {
     if (!rounds) {
       setRounds(startingRounds);
     }
-    setLoading(true);
+
     if (wordBank.length === 0) {
+      setLoading(true);
       getJSONData('dict.json')
         .then((data) => randomSample(data, rounds))
         .then((objects) => objects.map((o) => createAudio(o)))
         .then((audio) => {
           initWordBank(audio);
-          setLoading(false);
         });
     }
   }, [rounds, wordBank, startingRounds]);

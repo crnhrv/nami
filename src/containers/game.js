@@ -17,29 +17,15 @@ const GameContainer = ({ children }) => {
     newQuestion,
     failedQuestion,
     roundOver,
-    setLoading,
-    gameOver,
     wordBank,
     startGame,
   } = useGame();
 
   useEffect(() => {
-    if (!loading && startTimer === 3) {
+    if (startTimer > 0) {
       setTimeout(() => decrementStartTimer(), 1000);
     }
-  }, [startTimer, loading]);
-
-  useEffect(() => {
-    if (currentWord?.url) {
-      setLoading(false);
-    }
-  }, [currentWord]);
-
-  useEffect(() => {
-    if (gameOver) {
-      setLoading(false);
-    }
-  }, [gameOver]);
+  }, [startTimer]);
 
   useEffect(() => {
     if (roundOver) {
