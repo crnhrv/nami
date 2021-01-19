@@ -11,14 +11,19 @@ import {
   FlexContainer,
   Input,
   Form,
-  Label,
+  Text,
+  AccentText,
+  Item,
+  Title,
 } from './styles/game';
-import { useState, useEffect, useContext } from 'react';
-import { GameContext } from '../../contexts/game';
-import useGame from '../../hooks/game';
+import { useState, useEffect, useRef } from 'react';
 
 const Game = ({ children, ...restProps }) => {
-  return <Container {...restProps}>{children}</Container>;
+  return (
+    <Container maxWidth="320px" di="flex" dir="column" {...restProps}>
+      {children}
+    </Container>
+  );
 };
 
 Game.Timer = ({ children, ...restProps }) => {
@@ -29,13 +34,13 @@ Game.Audio = function GameAudio({ audio, children, ...restProps }) {
   const [tries, setTries] = useState(2);
 
   useEffect(() => {
-    audio.obj.play();
-  }, []);
+    audio.play();
+  }, [audio]);
 
   const handleClick = (e) => {
     e.preventDefault();
     if (tries > -11) {
-      audio.obj.play();
+      audio.play();
     }
 
     setTries((e) => e - 1);
@@ -44,8 +49,12 @@ Game.Audio = function GameAudio({ audio, children, ...restProps }) {
   return (
     <Audio {...restProps}>
       <FlexContainer>
-        <Count>Remaining: {tries}</Count>
-        <PlayButton onClick={handleClick}></PlayButton>
+        {tries > 0 && (
+          <>
+            <Count>{tries} Plays</Count>
+            <PlayButton onClick={handleClick}></PlayButton>
+          </>
+        )}
       </FlexContainer>
       {children}
     </Audio>
@@ -53,21 +62,31 @@ Game.Audio = function GameAudio({ audio, children, ...restProps }) {
 };
 
 Game.Choices = function GameChoices({
-  pitch,
+  word,
   notation,
+  incrementScore,
+  failedQuestion,
   children,
-  setAnswer,
+  newQuestion,
   ...restProps
 }) {
   const [input, setInput] = useState('');
+  const pitch = parseInt(word.pitch);
+  const focusRef = useRef(null);
+
+  useEffect(() => {
+    if (notation === 'numericFree') {
+      focusRef.current.focus();
+    }
+  }, [input]);
 
   const handleMulti = (gata) => {
     if ((gata === '平板' && pitch === 0) || (gata === '頭高' && pitch === 1)) {
-      setAnswer(true);
+      incrementScore();
     } else if (gata === '中高' && (pitch !== 0 || pitch !== 1)) {
-      setAnswer(true);
+      incrementScore();
     } else {
-      setAnswer(false);
+      failedQuestion();
     }
   };
 
@@ -77,11 +96,11 @@ Game.Choices = function GameChoices({
 
   const handleInput = (e) => {
     e.preventDefault();
-    console.log(input, pitch);
-    if (input === pitch) {
-      setAnswer(true);
+    setInput('');
+    if (parseInt(input) === pitch) {
+      incrementScore(true);
     } else {
-      setAnswer(false);
+      failedQuestion();
     }
   };
   const GATA = ['頭高', '中高', '平板'];
@@ -91,7 +110,12 @@ Game.Choices = function GameChoices({
     case 'numericFree':
       type = (
         <Form onSubmit={handleInput} dir="column">
-          <Input type="text" value={input} onChange={handleChange} />
+          <Input
+            ref={focusRef}
+            type="text"
+            value={input}
+            onChange={handleChange}
+          />
           <Button type="submit">Submit Answer</Button>
         </Form>
       );
@@ -125,6 +149,37 @@ Game.Submit = function GameSubmit({ pitch, children, ...restProps }) {
 
 Game.Score = function GameScore({ pitch, children, ...restProps }) {
   return <Score {...restProps}>{children}</Score>;
+};
+
+Game.GameOver = function GameOver({
+  restartGame,
+  words,
+  children,
+  ...restProps
+}) {
+  const handleClick = (e) => {
+    e.preventDefault();
+    restartGame();
+  };
+
+  const wordbank = words
+    .map((word, idx) => {
+      return (
+        <Item key={word.url}>
+          <AccentText>Round {words.length - idx}:</AccentText>
+          <Text passed={word.passed}>{word.kanji}</Text>
+        </Item>
+      );
+    })
+    .reverse();
+  return (
+    <Container maxWidth="720px" di="grid" dir="column" {...restProps}>
+      <Title>How You Did</Title>
+      {wordbank}
+      {children}
+      <Button onClick={handleClick}>Play Again?</Button>
+    </Container>
+  );
 };
 
 export default Game;

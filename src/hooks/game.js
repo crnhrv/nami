@@ -1,132 +1,89 @@
+import { createAudio } from '../utils/create_audio';
+import { getJSONData } from '../utils/get_json_data';
 import { settingsContext } from '../contexts/settings';
-import { useContext, useState, useEffect } from 'react';
-import { pitchDict } from '../lib/dict_parsed';
-import randomSample from '../utils/random_sample';
-
-const loadPitch = async (rounds) => {
-  const data = await randomSample(pitchDict, rounds);
-  return data;
-};
-
-const DL_URL =
-  'http://assets.languagepod101.com/dictionary/japanese/audiomp3.php?';
+import { randomSample } from '../utils/random_sample';
+import { useEffect, useReducer, useContext } from 'react';
+import { initialState, gameReducer } from '../reducers/game_reducer';
 
 const useGame = () => {
-  const {
-    rounds: startingRounds,
-    setRounds,
-    pitchNotation,
-    setPitchNotation,
-  } = useContext(settingsContext);
+  const { rounds: startingRounds, pitchNotation: startingPitch } = useContext(
+    settingsContext
+  );
 
-  const [loading, setLoading] = useState(true);
-  const [currentRound, setCurrentRound] = useState(startingRounds);
-  const [count, setCount] = useState(3);
-  const [words, setWords] = useState([]);
-  const [currentWord, setCurrentWord] = useState(null);
-  const [audio, setAudio] = useState({ url: '', obj: '' });
-  const [pitch, setPitch] = useState('');
-  const [answer, setAnswer] = useState(null);
-  const [score, setScore] = useState(0);
-  const [usedWords, setUsedWords] = useState([]);
+  initialState.rounds = startingRounds;
+  initialState.pitchNotation = startingPitch;
+
+  const [
+    {
+      loading,
+      currentRound,
+      rounds,
+      currentWord,
+      gameOver,
+      score,
+      startTimer,
+      gameTimer,
+      roundOver,
+      pitchNotation,
+      correctAnswer,
+      wordBank,
+    },
+    dispatch,
+  ] = useReducer(gameReducer, initialState);
+
+  const startGame = () => dispatch({ type: 'GAME_START' });
+  const initWordBank = (payload) =>
+    dispatch({ type: 'INITIALIZE_WORD_BANK', payload });
+  const newQuestion = () => dispatch({ type: 'NEW_QUESTION' });
+  const incrementScore = () => dispatch({ type: 'INCREMENT_SCORE' });
+  const decrementGameTimer = () => dispatch({ type: 'GAME_TIMER_DOWN' });
+  const decrementStartTimer = () => dispatch({ type: 'DECREMENT_START_TIMER' });
+  const setLoading = (payload) => dispatch({ type: 'SET_LOADING', payload });
+  const setPitchNotation = (payload) =>
+    dispatch({ type: 'CHANGE_PITCH_SETTING', payload });
+  const setRounds = (payload) =>
+    dispatch({ type: 'CHANGE_ROUNDS_SETTING', payload: parseInt(payload) });
+  const failedQuestion = () => dispatch({ type: 'FAILED_QUESTION' });
 
   useEffect(() => {
-    if (count === 3 && loading) {
-      loadPitch(startingRounds * 10).then((data) => {
-        setWords(data);
-        setLoading(false);
-        setCurrentWord(words[0]);
-        setCurrentRound((r) => r - 1);
-      });
+    if (!rounds) {
+      console.log('SETTING ROUNDS');
+      setRounds(startingRounds);
     }
 
-    let countID;
-    let roundID;
+    console.log('GETTING DATA');
 
-    if (!loading && count > 0) {
-      countID = setTimeout(() => setCount((c) => c - 1), 1000);
-    }
+    setLoading();
+    getJSONData('dict.json')
+      .then((data) => randomSample(data, rounds))
+      .then((objects) => objects.map((o) => createAudio(o)))
+      .then((audio) => initWordBank(audio));
+  }, [rounds]);
 
-    if (!currentWord && count <= 1 && currentRound > 0) {
-      roundID = setTimeout(() => {
-        setCurrentRound((r) => r - 1);
-        setCurrentWord(words[currentRound]);
-        setAudio('');
-      }, 6000);
-    }
-
-    if (currentWord) {
-      let [kanji, kana, pitch] = currentWord;
-      if (kana.length === pitch) {
-        setCurrentWord(
-          words[currentRound + Math.floor(Math.random() * words.length)]
-        );
-      }
-
-      if (currentWord.some((e) => e === '')) {
-        kana = kanji;
-      }
-
-      if (count <= 0 && !audio.url) {
-        setLoading(true);
-        const candidate = new Audio(`${DL_URL}kanji=${kanji}&kana=${kana}`);
-        setTimeout(() => {
-          if (candidate.duration < 5) {
-            setAudio({
-              url: `${DL_URL}kanji=${kanji}&kana=${kana}`,
-              obj: candidate,
-            });
-            setPitch(pitch);
-            setCurrentWord('');
-          } else {
-            setCurrentWord(
-              words[currentRound + Math.floor(Math.random() * words.length)]
-            );
-          }
-        }, 300);
-      }
-    }
-
-    if (answer !== null) {
-      if (answer) {
-        setScore((e) => e + 1);
-      }
-      setAnswer(null);
-    }
-
-    return () => {
-      clearTimeout(roundID);
-      clearTimeout(countID);
-    };
-  }, [
-    startingRounds,
-    score,
-    answer,
-    count,
-    currentRound,
-    loading,
-    words,
-    currentWord,
-    audio,
-  ]);
+  console.log(pitchNotation);
 
   return {
-    currentRound,
     setRounds,
-    pitchNotation,
-    setPitchNotation,
-    words,
+    rounds,
+    currentWord,
+    currentRound,
     loading,
     setLoading,
-    count,
-    currentWord,
-    setAudio,
-    audio,
-    pitch,
-    answer,
-    setAnswer,
+    pitchNotation,
+    startTimer,
+    decrementStartTimer,
+    gameTimer,
+    decrementGameTimer,
+    setPitchNotation,
+    startGame,
+    newQuestion,
     score,
-    setScore,
+    incrementScore,
+    failedQuestion,
+    gameOver,
+    roundOver,
+    wordBank,
+    correctAnswer,
   };
 };
 

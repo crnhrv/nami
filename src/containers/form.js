@@ -1,9 +1,12 @@
+import { useContext } from 'react';
 import { Form } from '../components/';
 import { SETTINGS } from '../constants/form_settings';
-import useGame from '../hooks/game';
+import { settingsContext } from '../contexts/settings';
 
 const FormContainer = () => {
-  const { rounds, setRounds, pitchNotation, setPitchNotation } = useGame();
+  const { rounds, setRounds, pitchNotation, setPitchNotation } = useContext(
+    settingsContext
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,7 +19,7 @@ const FormContainer = () => {
         <Form.Label htmlFor="rounds">
           <Form.LabelHead>Rounds</Form.LabelHead>
           <Form.Select
-            onChange={({ target }) => setRounds(target.value)}
+            onChange={({ target }) => setRounds(parseInt(target.value))}
             name="rounds"
             value={rounds}
           >

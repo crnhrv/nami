@@ -1,48 +1,70 @@
 import useGame from '../hooks/game';
-import { useState, useEffect, useContext } from 'react';
+import { useEffect } from 'react';
 import { Loading } from '../components';
 import { Game } from '../components/';
-import { settingsContext } from '../contexts/settings';
 
 const GameContainer = ({ children }) => {
   const {
     score,
     loading,
-    count,
-    audio,
-    pitch,
-    answer,
-    setAnswer,
+    currentWord,
+    incrementScore,
+    pitchNotation,
+    decrementStartTimer,
+    startTimer,
+    newQuestion,
+    failedQuestion,
+    roundOver,
     setLoading,
-    setScore,
+    gameOver,
+    wordBank,
+    startGame,
   } = useGame();
 
   useEffect(() => {
-    if (audio.url) {
+    setTimeout(() => decrementStartTimer(), 1000);
+  }, [startTimer]);
+
+  useEffect(() => {
+    if (currentWord?.url) {
       setLoading(false);
     }
-  }, [audio]);
+  }, [currentWord]);
 
-  const { pitchNotation } = useContext(settingsContext);
+  useEffect(() => {
+    if (gameOver) {
+      setLoading(false);
+    }
+  }, [gameOver]);
+
+  useEffect(() => {
+    if (roundOver) {
+      newQuestion();
+    }
+  }, [roundOver]);
 
   return (
     <>
-      {loading && <Loading.Spinner />}
-      {count >= 1 ? (
-        <Game.Timer>{count}</Game.Timer>
-      ) : audio.url ? (
+      {loading ? (
+        <Loading.Spinner />
+      ) : startTimer >= 1 ? (
+        <Game.Timer>{startTimer}</Game.Timer>
+      ) : currentWord?.url ? (
         <Game>
+          {/* <Game.TitleInfo roundOver={roundOver} correct={correctAnswer} ></Game.TitleInfo> */}
           <Game.Score>Score: {score}</Game.Score>
-          <Game.Audio controls audio={audio} />
+          <Game.Audio controls audio={currentWord.audio} />
           <Game.Choices
             notation={pitchNotation}
-            answer={answer}
-            setAnswer={setAnswer}
-            pitch={pitch}
+            incrementScore={incrementScore}
+            word={currentWord}
+            failedQuestion={failedQuestion}
+            newQuestion={newQuestion}
+            pitch={currentWord.pitch}
           ></Game.Choices>
         </Game>
       ) : (
-        loading && <Loading.Spinner />
+        <Game.GameOver words={wordBank} restartGame={startGame} />
       )}
     </>
   );

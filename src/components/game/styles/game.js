@@ -2,30 +2,38 @@ import styled from 'styled-components';
 import { colors } from '../../../global_styles';
 
 export const Container = styled.section`
-  display: flex;
-  flex-direction: column;
+  display: ${(props) => props.di};
+  flex-direction: ${(prop) => prop.dir};
+  grid-template-rows: 100px, 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  flex-wrap: wrap;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   margin: auto;
   padding: 20px;
-  max-width: 720px;
+  max-width: ${(props) => props.maxWidth};
+  grid-column-gap: 50px;
+
+  width: 100%;
+
   background-color: ${colors.shadow};
   border: 3px solid ${colors.light};
   border-radius: 5px;
   color: ${colors.accent};
 
-  @media (max-width: 600px) {
+  @media (max-width: 800px) {
+    position: inherit;
+    transform: none;
+    width: 60%;
     margin-top: 10px;
-    width: 80%;
   }
 
-  @media (max-height: 650px) {
+  @media (max-height: 950px) {
     position: inherit;
     transform: none;
     margin-top: 10px;
-    max-width: 500px;
   }
 `;
 
@@ -90,8 +98,9 @@ export const Button = styled.button`
   border-radius: 4px;
   font-size: 1.5rem;
   font-weight: bold;
-  margin: 10px 10px;
-
+  margin: 25px 10px;
+  place-self: center;
+  grid-column: 1/-1;
   padding: 10px 20px;
   border: 0;
   color: ${colors.shadow};
@@ -108,7 +117,8 @@ export const Button = styled.button`
 
 export const FlexContainer = styled.div`
   display: flex;
-  flex-direction: ${(props) => props.dir};
+  flex-direction: ${(prop) => prop.dir};
+  flex-wrap: ${(prop) => prop.wrap};
   align-items: center;
   justify-content: center;
   gap: 20px;
@@ -116,9 +126,40 @@ export const FlexContainer = styled.div`
 
 export const Form = styled.form`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${(prop) => prop.dir};
+  flex-wrap: ${(prop) => prop.wrap};
   align-items: center;
   justify-content: center;
   padding: 10px;
   gap: 10px;
+`;
+
+export const Text = styled.p`
+  margin: 0;
+  font-size: 1.5em;
+  text-align: left;
+  padding: 0;
+  width: auto;
+  color: ${(props) => (props.passed ? '#11C141' : 'crimson')};
+`;
+
+export const Item = styled.div`
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-right: 20px;
+`;
+
+export const Title = styled.h2`
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 3em;
+  margin: 0 0 15px;
+`;
+
+export const AccentText = styled.p`
+  color: ${colors.light};
+  font-size: 1.3em;
+  margin: 0;
+  padding: 0;
 `;
