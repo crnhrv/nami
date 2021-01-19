@@ -87,9 +87,14 @@ export const PlayButton = styled.button`
   border-color: transparent transparent transparent #021121;
   background-color: ${colors.shadow};
   border-style: inset;
+  cursor: pointer;
 
   &:focus {
     outline: solid 1px transparent;
+  }
+
+  &:hover {
+    background-color: ${colors.accent};
   }
 `;
 
