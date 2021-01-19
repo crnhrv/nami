@@ -62,8 +62,7 @@ export const Choices = styled.div`
   flex-direction: ${(props) => props.dir};
   align-items: center;
   justify-content: center;
-  padding: 10px;
-  gap: 10px;
+  width: 100%;
 `;
 
 export const Score = styled.h2`

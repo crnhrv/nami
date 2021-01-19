@@ -9,7 +9,7 @@ export const initialState = {
   currentRound: 0,
   gameOver: false,
   roundOver: false,
-  pitchNotation: 'numericFree',
+  pitchNotation: 'gataMulti',
 };
 
 export const gameReducer = (state = initialState, action) => {

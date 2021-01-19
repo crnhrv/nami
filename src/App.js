@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 const App = () => {
   const [rounds, setRounds] = useState(10);
-  const [pitchNotation, setPitchNotation] = useState('numericFree');
+  const [pitchNotation, setPitchNotation] = useState('gataMulti');
   return (
     <settingsContext.Provider
       value={{ rounds, setRounds, pitchNotation, setPitchNotation }}

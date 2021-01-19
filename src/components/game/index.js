@@ -21,7 +21,7 @@ import { useState, useEffect, useRef } from 'react';
 
 const Game = ({ children, ...restProps }) => {
   return (
-    <Container maxWidth="320px" di="flex" dir="column" {...restProps}>
+    <Container maxWidth="360px" di="flex" dir="column" {...restProps}>
       {children}
     </Container>
   );
