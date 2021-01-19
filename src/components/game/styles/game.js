@@ -26,7 +26,7 @@ export const Container = styled.section`
   @media (max-width: 800px) {
     position: inherit;
     transform: none;
-    width: 60%;
+    width: 80%;
     margin-top: 10px;
   }
 
@@ -117,6 +117,14 @@ export const Button = styled.button`
   &:hover {
     background-color: ${colors.accent};
   }
+
+  @media (max-width: 400px) {
+    font-size: 1.5em;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 1.2em;
+  }
 `;
 
 export const FlexContainer = styled.div`
@@ -145,6 +153,13 @@ export const VictoryText = styled.p`
   padding: 0;
   width: auto;
   color: ${(props) => (props.passed ? '#11C141' : 'crimson')};
+
+  @media (max-width: 400px) {
+    font-size: 1.2em;
+  }
+  @media (max-width: 320px) {
+    font-size: 1em;
+  }
 `;
 
 export const Text = styled.p`
@@ -166,6 +181,14 @@ export const Title = styled.h2`
   text-align: center;
   font-size: 3em;
   margin: 0 0 15px;
+
+  @media (max-width: 400px) {
+    font-size: 2em;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 1.8em;
+  }
 `;
 
 export const AccentText = styled.p`
@@ -173,4 +196,12 @@ export const AccentText = styled.p`
   font-size: 1.3em;
   margin: 0;
   padding: 0;
+
+  @media (max-width: 400px) {
+    font-size: 1.2em;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 1em;
+  }
 `;
