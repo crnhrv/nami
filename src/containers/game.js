@@ -24,10 +24,10 @@ const GameContainer = ({ children }) => {
   } = useGame();
 
   useEffect(() => {
-    if (!loading) {
+    if (!loading && startTimer === 3) {
       setTimeout(() => decrementStartTimer(), 1000);
     }
-  }, [startTimer]);
+  }, [startTimer, loading]);
 
   useEffect(() => {
     if (currentWord?.url) {

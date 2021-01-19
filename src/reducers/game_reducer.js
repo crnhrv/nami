@@ -35,6 +35,7 @@ export const gameReducer = (state = initialState, action) => {
         loading: false,
         roundOver: false,
         startTimer: 3,
+        score: 0,
         currentRound: 0,
         rounds: 0,
         wordBank: [],
@@ -48,9 +49,9 @@ export const gameReducer = (state = initialState, action) => {
         ...state,
         correctAnswer: false,
         roundOver: false,
+
         currentRound: state.currentRound + 1,
         currentWord: state.wordBank[state.currentRound + 1],
-        loading: true,
       };
     }
     case 'INCREMENT_SCORE': {
