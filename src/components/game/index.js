@@ -2,7 +2,6 @@ import {
   Container,
   Timer,
   Audio,
-  Submit,
   Choices,
   Score,
   Button,
@@ -12,10 +11,10 @@ import {
   Input,
   Form,
   Text,
+  Title,
   AccentText,
   VictoryText,
   Item,
-  Title,
 } from './styles/game';
 import { useState, useEffect, useRef } from 'react';
 
@@ -72,19 +71,65 @@ Game.Choices = function GameChoices({
   ...restProps
 }) {
   const [input, setInput] = useState('');
-  const pitch = parseInt(word.pitch);
-  const focusRef = useRef(null);
+  const focusRefInput = useRef(null);
 
   useEffect(() => {
     if (notation === 'numericFree') {
-      focusRef.current.focus();
+      focusRefInput.current.focus();
     }
   }, [input, notation]);
 
-  const handleMulti = (gata) => {
-    if ((gata === '平板' && pitch === 0) || (gata === '頭高' && pitch === 1)) {
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyPress);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  });
+
+  const handleKeyPress = (e) => {
+    if (notation === 'numericFree') {
+      return;
+    }
+    let key = e.key;
+    if (notation === 'gataMulti') {
+      if (e.key === '1') {
+        key = '頭高';
+      } else if (e.key === '2') {
+        key = '中高';
+      } else if (e.key === '3') {
+        key = '平板';
+      } else {
+        return;
+      }
+      return handleMultiGata(key);
+    } else if (key === '0') {
+      key = '平板';
+    } else if (key === '1') {
+      key = '頭高';
+    }
+
+    if (word.pitchChoices.includes(key)) {
+      return handleMultiNum(key);
+    }
+  };
+
+  const handleMultiGata = (gata) => {
+    if (gata === word.pitchType) {
       incrementScore();
-    } else if (gata === '中高' && (pitch !== 0 || pitch !== 1)) {
+    } else {
+      failedQuestion();
+    }
+  };
+
+  const handleMultiNum = (pitch) => {
+    if (pitch === '平板') {
+      pitch = 0;
+    } else if (pitch === '頭高') {
+      pitch = 1;
+    }
+
+    if (pitch === word.pitch) {
       incrementScore();
     } else {
       failedQuestion();
@@ -98,7 +143,7 @@ Game.Choices = function GameChoices({
   const handleInput = (e) => {
     e.preventDefault();
     setInput('');
-    if (parseInt(input) === pitch) {
+    if (input === word.pitch) {
       incrementScore(true);
     } else {
       failedQuestion();
@@ -111,20 +156,22 @@ Game.Choices = function GameChoices({
     case 'numericFree':
       type = (
         <Form onSubmit={handleInput} dir="column">
-          <Input
-            ref={focusRef}
-            type="text"
-            value={input}
-            onChange={handleChange}
-          />
+          <Input ref={focusRefInput} value={input} onChange={handleChange} />
           <Button type="submit">Submit</Button>
         </Form>
       );
       break;
     case 'gataMulti':
       type = GATA.map((gata) => (
-        <Button key={gata} onClick={() => handleMulti(gata)}>
+        <Button key={gata} onClick={() => handleMultiGata(gata)}>
           {gata}
+        </Button>
+      ));
+      break;
+    case 'numericMulti':
+      type = word.pitchChoices.map((pitch) => (
+        <Button size="small" key={pitch} onClick={() => handleMultiNum(pitch)}>
+          {pitch}
         </Button>
       ));
       break;
@@ -137,14 +184,6 @@ Game.Choices = function GameChoices({
       {type}
       {children}
     </Choices>
-  );
-};
-
-Game.Submit = function GameSubmit({ pitch, children, ...restProps }) {
-  return (
-    <Submit pitch {...restProps}>
-      {children}
-    </Submit>
   );
 };
 
@@ -163,7 +202,7 @@ Game.GameOver = function GameOver({
     restartGame();
   };
 
-  const wordbank = words
+  const roundWords = words
     .map((word, idx) => {
       return (
         <Item key={word.url}>
@@ -176,7 +215,7 @@ Game.GameOver = function GameOver({
   return (
     <Container maxWidth="720px" di="grid" dir="column" {...restProps}>
       <Title>How You Did</Title>
-      {wordbank}
+      {roundWords}
       {children}
       <Button onClick={handleClick}>Play Again?</Button>
     </Container>
