@@ -31,5 +31,5 @@ class ObjCreator:
 
 jp_dic = ObjCreator(keys_to_skip=['status_code', 'valid'])
 
-jp_dic.create_objs_from_dict(input_file='./dict_parsed.json')
+jp_dic.create_objs_from_file(input_file='./dict_parsed.json')
 jp_dic.write_objs_to_file(output_file='./test.json')
