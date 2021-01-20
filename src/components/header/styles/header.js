@@ -33,4 +33,5 @@ export const SubTitle = styled.h3`
 
 export const Link = styled(RouterLink)`
   text-decoration: none;
+  outline: 1px solid transparent;
 `;

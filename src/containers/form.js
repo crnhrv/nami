@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Form } from '../components/';
-import { SETTINGS } from '../constants/form_settings';
+import { FORM_SETTINGS } from '../constants/form_settings';
 import { settingsContext } from '../contexts/settings';
 
 const FormContainer = () => {
@@ -23,7 +23,7 @@ const FormContainer = () => {
             name="rounds"
             value={rounds}
           >
-            {SETTINGS.rounds.map((option) => (
+            {FORM_SETTINGS.rounds.map((option) => (
               <Form.Option key={option} value={option}>
                 {option}
               </Form.Option>
@@ -38,9 +38,9 @@ const FormContainer = () => {
             value={pitchNotation}
             name="pitchNotation"
           >
-            {Object.keys(SETTINGS.pitchNotation).map((option) => (
+            {Object.keys(FORM_SETTINGS.pitchNotation).map((option) => (
               <Form.Option key={option} value={option}>
-                {SETTINGS.pitchNotation[option]}
+                {FORM_SETTINGS.pitchNotation[option]}
               </Form.Option>
             ))}
           </Form.Select>

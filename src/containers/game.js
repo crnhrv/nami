@@ -12,36 +12,33 @@ const GameContainer = ({ children }) => {
     rounds,
     incrementScore,
     pitchNotation,
-    decrementStartTimer,
-    startTimer,
     newQuestion,
     failedQuestion,
+    loadingTimer,
+    decrementLoadingTimer,
     roundOver,
-    wordBank,
+    roundWords,
     startGame,
   } = useGame();
 
   useEffect(() => {
-    if (wordBank.length > 0 && startTimer > 0) {
-      setTimeout(() => decrementStartTimer(), 1000);
+    if (roundWords.length > 0 && loadingTimer > 0) {
+      setTimeout(() => decrementLoadingTimer(), 1000);
     }
-  }, [startTimer, wordBank]);
+  }, [loadingTimer, roundWords, decrementLoadingTimer]);
 
   useEffect(() => {
     if (roundOver) {
       newQuestion();
     }
-  }, [roundOver]);
+  }, [roundOver, newQuestion]);
 
   return (
     <>
-      {loading ? (
+      {loading || loadingTimer >= 1 ? (
         <Loading.Spinner />
-      ) : startTimer >= 1 ? (
-        <Game.Timer>{startTimer}</Game.Timer>
       ) : currentWord?.url ? (
         <Game>
-          {/* <Game.TitleInfo roundOver={roundOver} correct={correctAnswer} ></Game.TitleInfo> */}
           <Game.Score>
             <Game.Text>
               Round: {currentRound} / {rounds}
@@ -55,11 +52,10 @@ const GameContainer = ({ children }) => {
             word={currentWord}
             failedQuestion={failedQuestion}
             newQuestion={newQuestion}
-            pitch={currentWord.pitch}
           ></Game.Choices>
         </Game>
       ) : (
-        <Game.GameOver words={wordBank} restartGame={startGame} />
+        <Game.GameOver words={roundWords} restartGame={startGame} />
       )}
     </>
   );

@@ -2,69 +2,69 @@ import { createAudio } from '../utils/create_audio';
 import { getJSONData } from '../utils/get_json_data';
 import { settingsContext } from '../contexts/settings';
 import { randomSample } from '../utils/random_sample';
-import { useEffect, useReducer, useContext } from 'react';
+import { useEffect, useReducer, useContext, useCallback } from 'react';
 import { initialState, gameReducer } from '../reducers/game_reducer';
 
 const useGame = () => {
-  const { rounds: startingRounds, pitchNotation: startingPitch } = useContext(
+  const { rounds, setRounds, pitchNotation, setPitchNotation } = useContext(
     settingsContext
   );
-
-  initialState.rounds = startingRounds;
-  initialState.pitchNotation = startingPitch;
 
   const [
     {
       loading,
       currentRound,
-      rounds,
       currentWord,
-      gameOver,
       score,
-      startTimer,
-      gameTimer,
+      loadingTimer,
       roundOver,
-      pitchNotation,
-      correctAnswer,
       wordBank,
+      roundWords,
     },
     dispatch,
   ] = useReducer(gameReducer, initialState);
 
   const startGame = () => dispatch({ type: 'GAME_START' });
+
   const initWordBank = (payload) =>
     dispatch({ type: 'INITIALIZE_WORD_BANK', payload });
-  const newQuestion = () => dispatch({ type: 'NEW_QUESTION' });
+
+  const initRoundWords = (payload) =>
+    dispatch({ type: 'INITIALIZE_ROUND_WORDS', payload });
+
   const incrementScore = () => dispatch({ type: 'INCREMENT_SCORE' });
-  const decrementGameTimer = () => dispatch({ type: 'GAME_TIMER_DOWN' });
-  const decrementStartTimer = () => dispatch({ type: 'DECREMENT_START_TIMER' });
   const setLoading = (payload) => dispatch({ type: 'SET_LOADING', payload });
-  const setPitchNotation = (payload) =>
-    dispatch({ type: 'CHANGE_PITCH_SETTING', payload });
-  const setRounds = (payload) =>
-    dispatch({ type: 'CHANGE_ROUNDS_SETTING', payload: parseInt(payload) });
   const failedQuestion = () => dispatch({ type: 'FAILED_QUESTION' });
 
+  const newQuestion = useCallback((_) => dispatch({ type: 'NEW_QUESTION' }), [
+    dispatch,
+  ]);
+  const decrementLoadingTimer = useCallback(
+    (_) => dispatch({ type: 'DECREMENT_LOADING_TIMER' }),
+    [dispatch]
+  );
+
   useEffect(() => {
-    if (wordBank.length > 0) {
+    if (roundWords.length > 0) {
       setLoading(false);
+    } else if (wordBank.length > 0) {
+      const words = randomSample(wordBank, rounds);
+      const wordsWithAudio = words.map((o) => createAudio(o));
+      initRoundWords(wordsWithAudio);
     }
-  }, [wordBank, loading]);
+  }, [roundWords, wordBank, rounds, loading]);
 
   useEffect(() => {
     if (wordBank.length === 0) {
-      console.log('SETTING LOADING TRUE');
       setLoading(true);
-      getJSONData('dict.json')
-        .then((data) => randomSample(data, rounds))
-        .then((objects) => objects.map((o) => createAudio(o)))
-        .then((audio) => {
-          initWordBank(audio);
-        });
+      getJSONData('dict.json').then((data) => {
+        initWordBank(data);
+      });
     }
   }, [wordBank, rounds]);
 
   return {
+    startGame,
     setRounds,
     rounds,
     currentWord,
@@ -72,20 +72,15 @@ const useGame = () => {
     loading,
     setLoading,
     pitchNotation,
-    startTimer,
-    decrementStartTimer,
-    gameTimer,
-    decrementGameTimer,
     setPitchNotation,
-    startGame,
+    loadingTimer,
+    decrementLoadingTimer,
     newQuestion,
+    failedQuestion,
     score,
     incrementScore,
-    failedQuestion,
-    gameOver,
     roundOver,
-    wordBank,
-    correctAnswer,
+    roundWords,
   };
 };
 

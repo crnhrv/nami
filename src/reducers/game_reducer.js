@@ -1,15 +1,14 @@
+import { GAME_SETTINGS } from '../constants/game_settings';
+
 export const initialState = {
   loading: false,
-  gameTimer: 6,
-  startTimer: 3,
+  loadingTimer: GAME_SETTINGS.loadingTimer,
   wordBank: [],
+  roundWords: [],
   currentWord: {},
   score: 0,
-  rounds: 0,
   currentRound: 0,
-  gameOver: false,
   roundOver: false,
-  pitchNotation: 'gataMulti',
 };
 
 export const gameReducer = (state = initialState, action) => {
@@ -24,6 +23,12 @@ export const gameReducer = (state = initialState, action) => {
       return {
         ...state,
         wordBank: action.payload,
+      };
+    }
+    case 'INITIALIZE_ROUND_WORDS': {
+      return {
+        ...state,
+        roundWords: action.payload,
         loading: false,
         currentWord: action.payload[state.currentRound],
       };
@@ -31,86 +36,55 @@ export const gameReducer = (state = initialState, action) => {
     case 'GAME_START': {
       return {
         ...state,
-        gameOver: false,
         loading: false,
         roundOver: false,
-        startTimer: 3,
         score: 0,
+        loadingTimer: GAME_SETTINGS.loadingTimer,
         currentRound: 0,
-        wordBank: [],
+        roundWords: [],
       };
     }
     case 'NEW_QUESTION': {
-      if (state.currentRound === state.rounds - 1) {
-        return { ...state, loading: false, gameOver: true, currentWord: null };
+      if (state.currentRound === state.roundWords.length - 1) {
+        return { ...state, loading: false, currentWord: null };
       }
       return {
         ...state,
-        correctAnswer: false,
         roundOver: false,
-
         currentRound: state.currentRound + 1,
-        currentWord: state.wordBank[state.currentRound + 1],
+        currentWord: state.roundWords[state.currentRound + 1],
       };
     }
     case 'INCREMENT_SCORE': {
-      const newWordBank = state.wordBank.filter(
+      const newRoundWords = state.roundWords.filter(
         (word) => word.url !== state.currentWord.url
       );
       return {
         ...state,
         score: state.score + 1,
         roundOver: true,
-        wordBank: [{ ...state.currentWord, passed: true }, ...newWordBank],
+        roundWords: [{ ...state.currentWord, passed: true }, ...newRoundWords],
       };
     }
+    case 'DECREMENT_LOADING_TIMER': {
+      if (state.loadingTimer <= 0) {
+        return state;
+      } else {
+        return {
+          ...state,
+          loadingTimer: state.loadingTimer - 1,
+          loading: false,
+        };
+      }
+    }
     case 'FAILED_QUESTION': {
-      const newWordBank = state.wordBank.filter(
+      const newRoundWords = state.roundWords.filter(
         (word) => word.url !== state.currentWord.url
       );
       return {
         ...state,
         roundOver: true,
-        wordBank: [{ ...state.currentWord, passed: false }, ...newWordBank],
-      };
-    }
-    case 'DECREMENT_GAME_TIMER': {
-      if (state.gameTimer <= 0) {
-        return state;
-      } else if (state.gameTimer === 1) {
-        return {
-          ...state,
-          startTimer: state.gameTimer - 1,
-          roundOver: true,
-        };
-      } else {
-        return {
-          ...state,
-          gameTimer: state.gameTimer - 1,
-        };
-      }
-    }
-    case 'DECREMENT_START_TIMER': {
-      if (state.startTimer <= 0) {
-        return state;
-      } else {
-        return {
-          ...state,
-          startTimer: state.startTimer - 1,
-          loading: false,
-        };
-      }
-    }
-    case 'CHANGE_PITCH_SETTING': {
-      return {
-        ...state,
-        pitchNotation: action.payload,
-      };
-    }
-    case 'CHANGE_ROUNDS_SETTING': {
-      return {
-        ...state,
-        rounds: action.payload,
+        roundWords: [{ ...state.currentWord, passed: false }, ...newRoundWords],
       };
     }
     default: {

@@ -95,10 +95,6 @@ export const Submit = styled.button`
   }
 `;
 
-export const Text = styled.p`
-  margin: 0;
-`;
-
 export const Link = styled(RouterLink)`
   text-decoration: none;
 `;

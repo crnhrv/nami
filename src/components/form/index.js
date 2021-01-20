@@ -1,7 +1,6 @@
 import {
   Container,
   Title,
-  Text,
   Label,
   Input,
   Submit,
@@ -22,10 +21,6 @@ Form.Base = ({ children, ...restProps }) => {
 
 Form.Title = ({ children, ...restProps }) => {
   return <Title {...restProps}>{children}</Title>;
-};
-
-Form.Text = ({ children, ...restProps }) => {
-  return <Text {...restProps}>{children}</Text>;
 };
 
 Form.Label = ({ children, ...restProps }) => {
