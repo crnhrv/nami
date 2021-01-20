@@ -1,4 +1,5 @@
 import { GAME_SETTINGS } from '../constants/game_settings';
+import { COLORS } from '../constants/global_styles';
 
 export const initialState = {
   loading: false,
@@ -7,6 +8,7 @@ export const initialState = {
   roundWords: [],
   currentWord: {},
   score: 0,
+  color: COLORS.light,
   currentRound: 0,
   roundOver: false,
 };
@@ -39,6 +41,7 @@ export const gameReducer = (state = initialState, action) => {
         loading: false,
         roundOver: false,
         score: 0,
+        color: COLORS.light,
         loadingTimer: GAME_SETTINGS.loadingTimer,
         currentRound: 0,
         roundWords: [],
@@ -62,6 +65,7 @@ export const gameReducer = (state = initialState, action) => {
       return {
         ...state,
         score: state.score + 1,
+        color: COLORS.victory,
         roundOver: true,
         roundWords: [{ ...state.currentWord, passed: true }, ...newRoundWords],
       };
@@ -84,7 +88,14 @@ export const gameReducer = (state = initialState, action) => {
       return {
         ...state,
         roundOver: true,
+        color: COLORS.defeat,
         roundWords: [{ ...state.currentWord, passed: false }, ...newRoundWords],
+      };
+    }
+    case 'RESET_COLOR': {
+      return {
+        ...state,
+        color: COLORS.light,
       };
     }
     default: {

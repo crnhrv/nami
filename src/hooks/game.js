@@ -16,6 +16,7 @@ const useGame = () => {
       currentRound,
       currentWord,
       score,
+      color,
       loadingTimer,
       roundOver,
       wordBank,
@@ -63,6 +64,19 @@ const useGame = () => {
     }
   }, [wordBank, rounds]);
 
+  useEffect(() => {
+    if (roundWords.length > 0 && loadingTimer > 0) {
+      setTimeout(() => decrementLoadingTimer(), 1000);
+    }
+  }, [loadingTimer, roundWords, decrementLoadingTimer]);
+
+  useEffect(() => {
+    if (roundOver) {
+      newQuestion();
+      setTimeout(() => dispatch({ type: 'RESET_COLOR' }), 500);
+    }
+  }, [roundOver, newQuestion]);
+
   return {
     startGame,
     setRounds,
@@ -78,6 +92,7 @@ const useGame = () => {
     newQuestion,
     failedQuestion,
     score,
+    color,
     incrementScore,
     roundOver,
     roundWords,

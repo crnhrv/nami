@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../../global_styles';
+import { COLORS } from '../../../constants/global_styles';
 
 export const Container = styled.section`
   display: ${(props) => props.di};
@@ -16,11 +16,12 @@ export const Container = styled.section`
   max-width: ${(props) => props.maxWidth};
   grid-column-gap: 50px;
   width: 100%;
+  transition: all 0.3s ease;
 
-  background-color: ${colors.shadow};
-  border: 3px solid ${colors.light};
+  background-color: ${COLORS.shadow};
+  border: 3px solid ${(props) => (props.color ? props.color : COLORS.light)};
   border-radius: 5px;
-  color: ${colors.accent};
+  color: ${COLORS.accent};
 
   @media (max-width: 600px) {
     width: 80%;
@@ -35,7 +36,7 @@ export const Container = styled.section`
 export const Timer = styled.h1`
   animation: 1.5s infinite linear;
   font-size: 100px;
-  color: ${colors.light};
+  color: ${COLORS.light};
   box-sizing: border-box;
   position: fixed;
   height: 30vmin;
@@ -76,8 +77,8 @@ export const PlayButton = styled.button`
   height: 0;
   border-style: solid;
   border-width: 20px 0 20px 50px;
-  border-color: transparent transparent transparent ${colors.shadow};
-  background-color: ${colors.shadow};
+  border-color: transparent transparent transparent ${COLORS.shadow};
+  background-color: ${COLORS.shadow};
   border-style: inset;
   cursor: pointer;
 
@@ -86,12 +87,12 @@ export const PlayButton = styled.button`
   }
 
   &:hover {
-    border-color: transparent transparent transparent ${colors.light};
+    border-color: transparent transparent transparent ${COLORS.light};
   }
 `;
 
 export const Button = styled.button`
-  background-color: ${colors.light};
+  background-color: ${COLORS.light};
   border-radius: 4px;
   font-size: 1.5rem;
   font-weight: bold;
@@ -100,7 +101,7 @@ export const Button = styled.button`
   padding: ${(props) =>
     props.size === 'small' ? '0.4em 0.5em' : '0.6em 0.7em;'};
   border: 0;
-  color: ${colors.shadow};
+  color: ${COLORS.shadow};
   cursor: pointer;
   outline: 1px solid transparent;
 
@@ -109,7 +110,7 @@ export const Button = styled.button`
   }
 
   &:hover {
-    background-color: ${colors.accent};
+    background-color: ${COLORS.accent};
   }
 
   @media (max-width: 400px) {
@@ -170,7 +171,7 @@ export const Text = styled.p`
 `;
 
 export const AccentText = styled.p`
-  color: ${colors.light};
+  color: ${COLORS.light};
   font-size: 1.3em;
   margin: 0;
   padding: 0;
@@ -190,7 +191,7 @@ export const VictoryText = styled.p`
   text-align: left;
   padding: 0;
   width: auto;
-  color: ${(props) => (props.passed ? '#11C141' : 'crimson')};
+  color: ${(props) => (props.passed ? COLORS.victory : COLORS.defeat)};
 
   @media (max-width: 400px) {
     font-size: 1.2em;

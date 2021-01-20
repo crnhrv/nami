@@ -124,11 +124,11 @@ Game.Choices = function GameChoices({
 
   const handleMultiNum = (pitch) => {
     if (pitch === '平板') {
-      pitch = 0;
+      pitch = '0';
     } else if (pitch === '頭高') {
-      pitch = 1;
+      pitch = '1';
     }
-
+    console.log(pitch, word.pitch);
     if (pitch === word.pitch) {
       incrementScore();
     } else {

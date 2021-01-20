@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { colors } from '../../../global_styles';
+import { COLORS } from '../../../constants/global_styles';
 
 export const Spinner = styled.div`
     animation: spin 1.5s infinite linear;
     border: solid 2vmin transparent;
     border-radius: 50%;
-    border-right-color: ${colors.secondary};
-    border-top-color: ${colors.secondary};
+    border-right-color: ${COLORS.secondary};
+    border-top-color: ${COLORS.secondary};
     box-sizing: border-box;
     height: 20vmin;
     left: calc(50% - 10vmin);
@@ -18,8 +18,8 @@ export const Spinner = styled.div`
       animation: spin 2s infinite linear;
       border: solid 2vmin transparent;
       border-radius: 50%;
-      border-right-color: ${colors.light};
-      border-top-color: ${colors.light};
+      border-right-color: ${COLORS.light};
+      border-top-color: ${COLORS.light};
       box-sizing: border-box;
       content: '';
       height: 16vmin;
@@ -32,8 +32,8 @@ export const Spinner = styled.div`
       animation: spin 3s infinite linear;
       border: solid 2vmin transparent;
       border-radius: 50%;
-      border-right-color: ${colors.shadow};
-      border-top-color: ${colors.shadow};
+      border-right-color: ${COLORS.shadow};
+      border-top-color: ${COLORS.shadow};
       box-sizing: border-box;
       content: '';
       height: 12vmin;

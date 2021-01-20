@@ -1,5 +1,4 @@
 import useGame from '../hooks/game';
-import { useEffect } from 'react';
 import { Loading } from '../components';
 import { Game } from '../components/';
 
@@ -15,30 +14,19 @@ const GameContainer = ({ children }) => {
     newQuestion,
     failedQuestion,
     loadingTimer,
-    decrementLoadingTimer,
-    roundOver,
+    color,
     roundWords,
     startGame,
   } = useGame();
 
-  useEffect(() => {
-    if (roundWords.length > 0 && loadingTimer > 0) {
-      setTimeout(() => decrementLoadingTimer(), 1000);
-    }
-  }, [loadingTimer, roundWords, decrementLoadingTimer]);
-
-  useEffect(() => {
-    if (roundOver) {
-      newQuestion();
-    }
-  }, [roundOver, newQuestion]);
+  console.log(color);
 
   return (
     <>
       {loading || loadingTimer >= 1 ? (
         <Loading.Spinner />
       ) : currentWord?.url ? (
-        <Game>
+        <Game color={color}>
           <Game.Score>
             <Game.Text>
               Round: {currentRound} / {rounds}

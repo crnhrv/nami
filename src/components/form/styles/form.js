@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../../global_styles';
+import { COLORS } from '../../../constants/global_styles';
 import { Link as RouterLink } from 'react-router-dom';
 
 export const Container = styled.section`
@@ -10,10 +10,10 @@ export const Container = styled.section`
   margin: auto;
   padding: 20px;
   max-width: 720px;
-  background-color: ${colors.shadow};
-  border: 3px solid ${colors.light};
+  background-color: ${COLORS.shadow};
+  border: 3px solid ${COLORS.light};
   border-radius: 5px;
-  color: ${colors.accent};
+  color: ${COLORS.accent};
 
   @media (max-width: 600px) {
     margin-top: 10px;
@@ -75,7 +75,7 @@ export const Select = styled.select`
 export const Option = styled.option``;
 
 export const Submit = styled.button`
-  background-color: ${colors.light};
+  background-color: ${COLORS.light};
   border-radius: 4px;
   font-size: 2rem;
   font-weight: bold;
@@ -83,7 +83,7 @@ export const Submit = styled.button`
   padding: 10px 20px;
   border: 0;
   width: 100%;
-  color: ${colors.shadow};
+  color: ${COLORS.shadow};
   cursor: pointer;
 
   &:disabled {
@@ -91,7 +91,7 @@ export const Submit = styled.button`
   }
 
   &:hover {
-    background-color: ${colors.accent};
+    background-color: ${COLORS.accent};
   }
 `;
 
