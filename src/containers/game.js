@@ -19,8 +19,6 @@ const GameContainer = ({ children }) => {
     startGame,
   } = useGame();
 
-  console.log(color);
-
   return (
     <>
       {loading || loadingTimer >= 1 ? (

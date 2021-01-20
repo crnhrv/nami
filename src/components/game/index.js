@@ -128,7 +128,6 @@ Game.Choices = function GameChoices({
     } else if (pitch === '頭高') {
       pitch = '1';
     }
-    console.log(pitch, word.pitch);
     if (pitch === word.pitch) {
       incrementScore();
     } else {
