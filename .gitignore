@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+src/lib/dict_parsed.json
+.gitignore
+src/lib/validated_dict.json
