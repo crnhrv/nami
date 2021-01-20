@@ -20,15 +20,31 @@ export const Logo = styled.img`
 export const Title = styled.h1`
   margin: 0 4px 0 10px;
   color: ${COLORS.light};
-  font-size: 76px;
+  font-size: 4.75rem;
   text-align: center;
+
+  @media (max-width: 600px) {
+    font-size: 2.5rem;
+  }
+
+  @media (max-height: 550px) {
+    font-size: 2.5rem;
+  }
 `;
 
 export const SubTitle = styled.h3`
   margin: 15px 0 0 0;
   color: ${COLORS.accent};
   text-align: center;
-  font-size: 36px;
+  font-size: 2.25rem;
+
+  @media (max-width: 600px) {
+    font-size: 1.55rem;
+  }
+
+  @media (max-height: 400px) {
+    font-size: 1.55rem;
+  }
 `;
 
 export const Link = styled(RouterLink)`

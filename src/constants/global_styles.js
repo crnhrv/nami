@@ -5,5 +5,5 @@ export const COLORS = {
   shadow: '#203647',
   accent: '#EEFBFB',
   victory: '#11c141',
-  defeat: 'crimson',
+  defeat: 'rgba(255, 0, 0, 0.6)',
 };

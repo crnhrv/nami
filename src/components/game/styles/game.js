@@ -16,7 +16,7 @@ export const Container = styled.section`
   max-width: ${(props) => props.maxWidth};
   grid-column-gap: 50px;
   width: 100%;
-  transition: all 0.3s ease;
+  transition: border 0.25s ease;
 
   background-color: ${COLORS.shadow};
   border: 3px solid ${(props) => (props.color ? props.color : COLORS.light)};
@@ -24,12 +24,16 @@ export const Container = styled.section`
   color: ${COLORS.accent};
 
   @media (max-width: 600px) {
+    position: initial;
     width: 80%;
-    margin-top: 10px;
+    top: 0;
+    left: 0;
+    margin: 10px auto;
+    transform: none;
   }
 
-  @media (max-height: 550px) {
-    margin-top: 10px;
+  @media (max-width: 810px) {
+    width: 80%;
   }
 `;
 
@@ -89,6 +93,14 @@ export const PlayButton = styled.button`
   &:hover {
     border-color: transparent transparent transparent ${COLORS.light};
   }
+
+  @media (max-width: 400px) {
+    border-width: 15px 0 15px 35px;
+  }
+
+  @media (max-height: 520px) {
+    font-size: 1.2rem;
+  }
 `;
 
 export const Button = styled.button`
@@ -104,6 +116,7 @@ export const Button = styled.button`
   color: ${COLORS.shadow};
   cursor: pointer;
   outline: 1px solid transparent;
+  transition: all 0.2s ease;
 
   &:disabled {
     opacity: 0.5;
@@ -114,11 +127,17 @@ export const Button = styled.button`
   }
 
   @media (max-width: 400px) {
-    font-size: 1.5em;
+    font-size: 1.2rem;
+    margin: 5px 10px 0 0;
+    padding: ${(props) =>
+      props.size === 'small' ? '0.2em 0.4em' : '0.3em 0.5em;'};
   }
 
-  @media (max-width: 320px) {
-    font-size: 1.2em;
+  @media (max-width: 600px) {
+    font-size: 1.2rem;
+    margin: 10px auto;
+    padding: ${(props) =>
+      props.size === 'small' ? '0.2em 0.4em' : '0.3em 0.5em;'};
   }
 `;
 
@@ -146,6 +165,10 @@ export const Item = styled.div`
   align-items: baseline;
   justify-content: space-between;
   padding-right: 20px;
+
+  @media (max-width: 600px) {
+    padding-right: 0;
+  }
 `;
 
 export const Title = styled.h2`
@@ -154,49 +177,52 @@ export const Title = styled.h2`
   font-size: 3em;
   margin: 0 0 15px;
 
-  @media (max-width: 400px) {
-    font-size: 2em;
+  @media (max-width: 500px) {
+    font-size: 1.3rem;
   }
 
-  @media (max-width: 320px) {
-    font-size: 1.8em;
+  @media (max-height: 720px) {
+    font-size: 1.5rem;
   }
 `;
 
 export const Text = styled.p`
   margin: 0;
   padding: 0;
-  font-size: 1.2em;
+  font-size: 1.1rem;
   text-align: center;
 `;
 
-export const AccentText = styled.p`
+export const AccentText = styled.span`
   color: ${COLORS.light};
-  font-size: 1.3em;
+  font-size: 1.2rem;
   margin: 0;
   padding: 0;
+  position: relative;
+
+  bottom: 1px;
 
   @media (max-width: 400px) {
-    font-size: 1.2em;
-  }
-
-  @media (max-width: 320px) {
-    font-size: 1em;
+    font-size: 1.1rem;
   }
 `;
 
 export const VictoryText = styled.p`
   margin: 0;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   text-align: left;
-  padding: 0;
-  width: auto;
+  padding: 1px 15px;
+  cursor: pointer;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
   color: ${(props) => (props.passed ? COLORS.victory : COLORS.defeat)};
 
-  @media (max-width: 400px) {
-    font-size: 1.2em;
+  &:hover {
+    color: ${COLORS.accent};
   }
-  @media (max-width: 320px) {
-    font-size: 1em;
+
+  @media (max-width: 400px) {
+    font-size: 1.1rem;
   }
 `;

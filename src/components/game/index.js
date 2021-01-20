@@ -206,7 +206,9 @@ Game.GameOver = function GameOver({
       return (
         <Item key={word.url}>
           <AccentText>Round {words.length - idx}:</AccentText>
-          <VictoryText passed={word.passed}>{word.kanji}</VictoryText>
+          <VictoryText onClick={() => word.audio.play()} passed={word.passed}>
+            {word.kanji} <AccentText>[{word.pitch}]</AccentText>
+          </VictoryText>
         </Item>
       );
     })
