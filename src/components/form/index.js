@@ -36,16 +36,16 @@ Form.LabelHead = ({ children, ...restProps }) => {
   return <LabelHead {...restProps}>{children}</LabelHead>;
 };
 
+Form.Input = ({ ...restProps }) => {
+  return <Input {...restProps}></Input>;
+};
+
 Form.Select = ({ children, ...restProps }) => {
   return <Select {...restProps}>{children}</Select>;
 };
 
 Form.Option = ({ children, ...restProps }) => {
   return <Option {...restProps}>{children}</Option>;
-};
-
-Form.Input = ({ ...restProps }) => {
-  return <Input {...restProps}></Input>;
 };
 
 Form.Submit = ({ children, ...restProps }) => {

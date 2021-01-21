@@ -19,9 +19,9 @@ export const Logo = styled.img`
 
 export const Title = styled.h1`
   margin: 0 4px 0 10px;
-  color: ${COLORS.light};
-  font-size: 4.75rem;
   text-align: center;
+  font-size: 4.75rem;
+  color: ${COLORS.light};
 
   @media (max-width: 600px) {
     font-size: 2.5rem;
@@ -34,9 +34,9 @@ export const Title = styled.h1`
 
 export const SubTitle = styled.h3`
   margin: 15px 0 0 0;
-  color: ${COLORS.accent};
   text-align: center;
   font-size: 2.25rem;
+  color: ${COLORS.accent};
 
   @media (max-width: 600px) {
     font-size: 1.55rem;

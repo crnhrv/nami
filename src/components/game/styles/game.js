@@ -2,33 +2,32 @@ import styled from 'styled-components';
 import { COLORS } from '../../../constants/global_styles';
 
 export const Container = styled.section`
-  display: ${(props) => props.di};
-  flex-direction: ${(prop) => prop.dir};
-  grid-template-rows: 100px, 1fr;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  flex-wrap: wrap;
   position: fixed;
   top: 50%;
   left: 50%;
+  display: ${(props) => props.di};
+  flex-direction: ${(prop) => prop.dir};
+  flex-wrap: wrap;
+  grid-template-rows: 100px, 1fr;
+  grid-column-gap: 50px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   transform: translate(-50%, -50%);
+  transition: border 0.25s ease;
+  border: 3px solid ${(props) => (props.color ? props.color : COLORS.light)};
+  border-radius: 5px;
   margin: auto;
   padding: 20px;
   max-width: ${(props) => props.maxWidth};
-  grid-column-gap: 50px;
   width: 100%;
-  transition: border 0.25s ease;
-
   background-color: ${COLORS.shadow};
-  border: 3px solid ${(props) => (props.color ? props.color : COLORS.light)};
-  border-radius: 5px;
   color: ${COLORS.accent};
 
   @media (max-width: 600px) {
     position: initial;
-    width: 80%;
     top: 0;
     left: 0;
     margin: 10px auto;
+    width: 80%;
     transform: none;
   }
 
@@ -37,53 +36,100 @@ export const Container = styled.section`
   }
 `;
 
-export const Timer = styled.h1`
-  animation: 1.5s infinite linear;
-  font-size: 100px;
-  color: ${COLORS.light};
-  box-sizing: border-box;
-  position: fixed;
-  height: 30vmin;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+export const FlexContainer = styled.div`
+  display: flex;
+  flex-direction: ${(prop) => prop.dir};
+  flex-wrap: ${(prop) => prop.wrap};
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 `;
 
 export const Audio = styled.div``;
 
-export const Count = styled.h3`
-  text-align: center;
-`;
-
 export const Choices = styled.div`
   display: flex;
   flex-direction: ${(props) => props.dir};
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 100%;
 `;
 
-export const Score = styled.h2`
-  text-align: center;
+export const Form = styled.form`
+  display: flex;
+  flex-direction: ${(prop) => prop.dir};
+  flex-wrap: ${(prop) => prop.wrap};
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+`;
+
+export const Item = styled.div`
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-right: 20px;
+
+  @media (max-width: 600px) {
+    padding-right: 0;
+  }
 `;
 
 export const Label = styled.label``;
 
 export const Input = styled.input`
-  height: 100%;
   width: 82%;
+  height: 100%;
   padding: 10px;
   text-align: center;
 `;
 
+export const Button = styled.button`
+  grid-column: 1/-1;
+  outline: 1px solid transparent;
+  margin: 15px 10px;
+  border: 0;
+  border-radius: 4px;
+  padding: ${(props) =>
+    props.size === 'small' ? '0.4em 0.5em' : '0.6em 0.7em;'};
+  background-color: ${COLORS.light};
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: ${COLORS.shadow};
+
+  &:disabled {
+    opacity: 0.5;
+  }
+
+  &:hover {
+    background-color: ${COLORS.accent};
+  }
+
+  @media (max-width: 400px) {
+    margin: 5px 10px 0 0;
+    padding: ${(props) =>
+      props.size === 'small' ? '0.2em 0.4em' : '0.3em 0.5em;'};
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 600px) {
+    margin: 10px auto;
+    padding: ${(props) =>
+      props.size === 'small' ? '0.2em 0.4em' : '0.3em 0.5em;'};
+    font-size: 1.2rem;
+  }
+`;
+
 export const PlayButton = styled.button`
-  width: 0;
-  height: 0;
-  border-style: solid;
+  border-style: inset;
   border-width: 20px 0 20px 50px;
   border-color: transparent transparent transparent ${COLORS.shadow};
+  width: 0;
+  height: 0;
   background-color: ${COLORS.shadow};
-  border-style: inset;
   cursor: pointer;
 
   &:focus {
@@ -103,79 +149,11 @@ export const PlayButton = styled.button`
   }
 `;
 
-export const Button = styled.button`
-  background-color: ${COLORS.light};
-  border-radius: 4px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin: 15px 10px;
-  grid-column: 1/-1;
-  padding: ${(props) =>
-    props.size === 'small' ? '0.4em 0.5em' : '0.6em 0.7em;'};
-  border: 0;
-  color: ${COLORS.shadow};
-  cursor: pointer;
-  outline: 1px solid transparent;
-  transition: all 0.2s ease;
-
-  &:disabled {
-    opacity: 0.5;
-  }
-
-  &:hover {
-    background-color: ${COLORS.accent};
-  }
-
-  @media (max-width: 400px) {
-    font-size: 1.2rem;
-    margin: 5px 10px 0 0;
-    padding: ${(props) =>
-      props.size === 'small' ? '0.2em 0.4em' : '0.3em 0.5em;'};
-  }
-
-  @media (max-width: 600px) {
-    font-size: 1.2rem;
-    margin: 10px auto;
-    padding: ${(props) =>
-      props.size === 'small' ? '0.2em 0.4em' : '0.3em 0.5em;'};
-  }
-`;
-
-export const FlexContainer = styled.div`
-  display: flex;
-  flex-direction: ${(prop) => prop.dir};
-  flex-wrap: ${(prop) => prop.wrap};
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-`;
-
-export const Form = styled.form`
-  display: flex;
-  flex-direction: ${(prop) => prop.dir};
-  flex-wrap: ${(prop) => prop.wrap};
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  gap: 10px;
-`;
-
-export const Item = styled.div`
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  padding-right: 20px;
-
-  @media (max-width: 600px) {
-    padding-right: 0;
-  }
-`;
-
 export const Title = styled.h2`
   grid-column: 1 / -1;
+  margin: 0 0 15px;
   text-align: center;
   font-size: 3em;
-  margin: 0 0 15px;
 
   @media (max-width: 500px) {
     font-size: 1.3rem;
@@ -186,21 +164,28 @@ export const Title = styled.h2`
   }
 `;
 
-export const Text = styled.p`
-  margin: 0;
-  padding: 0;
-  font-size: 1.1rem;
+export const Score = styled.h2`
   text-align: center;
 `;
 
-export const AccentText = styled.span`
-  color: ${COLORS.light};
-  font-size: 1.2rem;
+export const Count = styled.h3`
+  text-align: center;
+`;
+
+export const Text = styled.p`
   margin: 0;
   padding: 0;
-  position: relative;
+  text-align: center;
+  font-size: 1.1rem;
+`;
 
+export const AccentText = styled.span`
+  position: relative;
   bottom: 1px;
+  margin: 0;
+  padding: 0;
+  font-size: 1.2rem;
+  color: ${COLORS.light};
 
   @media (max-width: 400px) {
     font-size: 1.1rem;
@@ -208,14 +193,13 @@ export const AccentText = styled.span`
 `;
 
 export const VictoryText = styled.p`
-  margin: 0;
-  font-size: 1.5rem;
-  text-align: left;
+  margin: 5px;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   padding: 1px 15px;
   cursor: pointer;
-  margin: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
+  font-size: 1.5rem;
+  text-align: left;
   color: ${(props) => (props.passed ? COLORS.victory : COLORS.defeat)};
 
   &:hover {
