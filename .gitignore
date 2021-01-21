@@ -25,3 +25,4 @@ src/lib/dict_parsed.json
 .gitignore
 src/lib/validated_dict.json
 src/lib/test.json
+src/lib/common_words.txt
