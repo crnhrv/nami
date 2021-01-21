@@ -1,6 +1,5 @@
 import {
   Container,
-  Timer,
   Audio,
   Choices,
   Score,
@@ -26,8 +25,12 @@ const Game = ({ children, ...restProps }) => {
   );
 };
 
-Game.Timer = ({ children, ...restProps }) => {
-  return <Timer {...restProps}>{children}</Timer>;
+Game.Score = function GameScore({ pitch, children, ...restProps }) {
+  return <Score {...restProps}>{children}</Score>;
+};
+
+Game.Text = function GameText({ children, ...restProps }) {
+  return <Text {...restProps}>{children}</Text>;
 };
 
 Game.Audio = function GameAudio({ audio, children, ...restProps }) {
@@ -35,6 +38,7 @@ Game.Audio = function GameAudio({ audio, children, ...restProps }) {
 
   useEffect(() => {
     audio.play();
+    setTries(2);
   }, [audio]);
 
   const handleClick = (e) => {
@@ -186,10 +190,6 @@ Game.Choices = function GameChoices({
   );
 };
 
-Game.Score = function GameScore({ pitch, children, ...restProps }) {
-  return <Score {...restProps}>{children}</Score>;
-};
-
 Game.GameOver = function GameOver({
   restartGame,
   words,
@@ -221,10 +221,6 @@ Game.GameOver = function GameOver({
       <Button onClick={handleClick}>Play Again?</Button>
     </Container>
   );
-};
-
-Game.Text = function GameText({ children, ...restProps }) {
-  return <Text {...restProps}>{children}</Text>;
 };
 
 export default Game;
