@@ -39,6 +39,13 @@ export const Title = styled.h1`
   }
 `;
 
+export const Text = styled.p`
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+  gap: 7px;
+`;
+
 export const Base = styled.form`
   display: flex;
   width: 100%;
@@ -52,7 +59,11 @@ export const Input = styled.input`
   width: 20px;
   border: 2px solid #555;
 `;
-export const Label = styled.label``;
+export const Label = styled.label`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+`;
 
 export const LabelHead = styled.p`
   margin: 0;

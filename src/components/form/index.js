@@ -9,6 +9,7 @@ import {
   Select,
   Option,
   Link,
+  Text,
 } from './styles/form';
 
 const Form = ({ children, ...restProps }) => {
@@ -21,6 +22,10 @@ Form.Base = ({ children, ...restProps }) => {
 
 Form.Title = ({ children, ...restProps }) => {
   return <Title {...restProps}>{children}</Title>;
+};
+
+Form.Text = ({ children, ...restProps }) => {
+  return <Text {...restProps}>{children}</Text>;
 };
 
 Form.Label = ({ children, ...restProps }) => {

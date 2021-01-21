@@ -45,6 +45,12 @@ const FormContainer = () => {
             ))}
           </Form.Select>
         </Form.Label>
+        <Form.Label>
+          <Form.Text>
+            <Form.Input type="checkbox" />
+            Use Common Words Only
+          </Form.Text>
+        </Form.Label>
         <Form.Link to="/play">
           <Form.Submit>START</Form.Submit>
         </Form.Link>
