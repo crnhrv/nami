@@ -6,9 +6,13 @@ import { useEffect, useReducer, useContext, useCallback } from 'react';
 import { initialState, gameReducer } from '../reducers/game_reducer';
 
 const useGame = () => {
-  const { rounds, setRounds, pitchNotation, setPitchNotation } = useContext(
-    settingsContext
-  );
+  const {
+    rounds,
+    setRounds,
+    pitchNotation,
+    setPitchNotation,
+    commonWords,
+  } = useContext(settingsContext);
 
   const [
     {
@@ -56,13 +60,14 @@ const useGame = () => {
   }, [roundWords, wordBank, rounds, loading]);
 
   useEffect(() => {
-    if (wordBank.length === 0) {
+    const dict = commonWords ? 'common_dict.json' : 'dict.json';
+    if (!loading & (wordBank.length === 0)) {
       setLoading(true);
-      getJSONData('dict.json').then((data) => {
+      getJSONData(dict).then((data) => {
         initWordBank(data);
       });
     }
-  }, [wordBank, rounds]);
+  }, [wordBank, rounds, commonWords, loading]);
 
   useEffect(() => {
     if (roundWords.length > 0 && loadingTimer > 0) {
@@ -96,6 +101,7 @@ const useGame = () => {
     incrementScore,
     roundOver,
     roundWords,
+    commonWords,
   };
 };
 

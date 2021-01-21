@@ -5,5 +5,4 @@ export const FORM_SETTINGS = {
     gataMulti: '-Gata Style (Multiple Choice)',
     numericFree: 'Numeric (Free Input)',
   },
-  commonWords: true,
 };

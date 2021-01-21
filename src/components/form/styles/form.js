@@ -31,7 +31,7 @@ export const Container = styled.section`
 export const Title = styled.h1`
   margin: 0 0 20px;
   text-align: center;
-  font-size: 4rem;
+  font-size: 3rem;
   text-transform: uppercase;
 
   @media (max-width: 360px) {
@@ -95,6 +95,7 @@ export const Submit = styled.button`
   border: 0;
   width: 100%;
   color: ${COLORS.shadow};
+  transition: all 0.2s ease;
   cursor: pointer;
 
   &:disabled {

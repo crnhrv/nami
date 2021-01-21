@@ -12,9 +12,18 @@ const App = () => {
   const [pitchNotation, setPitchNotation] = useState(
     GAME_SETTINGS.pitchNotation
   );
+  const [commonWords, setCommonWords] = useState(GAME_SETTINGS.commonWords);
+
   return (
     <settingsContext.Provider
-      value={{ rounds, setRounds, pitchNotation, setPitchNotation }}
+      value={{
+        rounds,
+        setRounds,
+        pitchNotation,
+        setPitchNotation,
+        commonWords,
+        setCommonWords,
+      }}
     >
       <HeaderContainer />
       <Switch>

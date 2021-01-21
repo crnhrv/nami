@@ -4,9 +4,14 @@ import { FORM_SETTINGS } from '../constants/form_settings';
 import { settingsContext } from '../contexts/settings';
 
 const FormContainer = () => {
-  const { rounds, setRounds, pitchNotation, setPitchNotation } = useContext(
-    settingsContext
-  );
+  const {
+    rounds,
+    setRounds,
+    pitchNotation,
+    setPitchNotation,
+    commonWords,
+    setCommonWords,
+  } = useContext(settingsContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,7 +52,12 @@ const FormContainer = () => {
         </Form.Label>
         <Form.Label>
           <Form.Text>
-            <Form.Input type="checkbox" />
+            <Form.Input
+              name={'commonWords'}
+              onChange={({ target }) => setCommonWords(target.checked)}
+              checked={commonWords}
+              type="checkbox"
+            />
             Use Common Words Only
           </Form.Text>
         </Form.Label>
