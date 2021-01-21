@@ -2,7 +2,7 @@
 
 [Try it here.](https://nami-pitch.herokuapp.com/)
 
-If you know anything about Japanese pitch accent this game should be fairly self explanatory.
+If you know anything about Japanese pitch accent this game should be fairly self explanatory. Note that odaka (尾高) pitch accent words have been removed programmatically from the base dictionary to avoid ambiguity with heiban (平板) words.
 
 If not, the short explanation is that Japanese words have pitch accent with is either flat or drops after a certain part of the word. This can be quite hard to hear if you are not a musician nor come from a language that uses pitch accent to distinguish words. See [Wikipedia](https://en.wikipedia.org/wiki/Japanese_pitch_accent) for in an depth discussion.
 
