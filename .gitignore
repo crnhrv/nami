@@ -26,3 +26,4 @@ src/lib/dict_parsed.json
 src/lib/validated_dict.json
 src/lib/test.json
 src/lib/common_words.txt
+public/common_dict.json
