@@ -58,7 +58,7 @@ const FormContainer = () => {
               checked={commonWords}
               type="checkbox"
             />
-            Use Common Words Only
+            Only Common Words
           </Form.Text>
         </Form.Label>
         <Form.Link to="/play">
