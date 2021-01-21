@@ -2,7 +2,6 @@ import { useContext } from 'react';
 import { Form } from '../components/';
 import { FORM_SETTINGS } from '../constants/form_settings';
 import { settingsContext } from '../contexts/settings';
-import ReactTooltip from 'react-tooltip';
 
 const FormContainer = () => {
   const {
