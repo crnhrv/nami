@@ -10,6 +10,8 @@ import {
   Option,
   Link,
   Text,
+  TooltipBase,
+  TooltipLink,
 } from './styles/form';
 
 const Form = ({ children, ...restProps }) => {
@@ -26,6 +28,19 @@ Form.Title = ({ children, ...restProps }) => {
 
 Form.Text = ({ children, ...restProps }) => {
   return <Text {...restProps}>{children}</Text>;
+};
+
+Form.Link = ({ children, ...restProps }) => {
+  return <Link {...restProps}>{children}</Link>;
+};
+
+Form.Tooltip = ({ children, ...restProps }) => {
+  return (
+    <>
+      <TooltipBase />
+      <TooltipLink {...restProps}>{children}</TooltipLink>
+    </>
+  );
 };
 
 Form.Label = ({ children, ...restProps }) => {
@@ -50,10 +65,6 @@ Form.Option = ({ children, ...restProps }) => {
 
 Form.Submit = ({ children, ...restProps }) => {
   return <Submit {...restProps}>{children}</Submit>;
-};
-
-Form.Link = ({ children, ...restProps }) => {
-  return <Link {...restProps}>{children}</Link>;
 };
 
 export default Form;

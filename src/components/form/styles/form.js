@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { COLORS } from '../../../constants/global_styles';
 import { Link as RouterLink } from 'react-router-dom';
+import ReactTooltip from 'react-tooltip';
 
 export const Container = styled.section`
   position: fixed;
@@ -48,13 +49,21 @@ export const Title = styled.h1`
 
 export const Text = styled.p`
   display: flex;
-  gap: 7px;
+  gap: 3px;
   align-items: center;
   margin: 5px 0;
 `;
 
 export const Link = styled(RouterLink)`
   text-decoration: none;
+`;
+
+export const TooltipBase = styled(ReactTooltip)``;
+
+export const TooltipLink = styled.span`
+  padding-bottom: -10px;
+  cursor: help;
+  color: ${COLORS.light};
 `;
 
 export const Label = styled.label`

@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { Form } from '../components/';
 import { FORM_SETTINGS } from '../constants/form_settings';
 import { settingsContext } from '../contexts/settings';
+import ReactTooltip from 'react-tooltip';
 
 const FormContainer = () => {
   const {
@@ -58,7 +59,11 @@ const FormContainer = () => {
               checked={commonWords}
               type="checkbox"
             />
-            Only Common Words
+            Only{' '}
+            <Form.Tooltip data-tip="From the 20k most frequent words on Wikipedia">
+              Common
+            </Form.Tooltip>{' '}
+            Words
           </Form.Text>
         </Form.Label>
         <Form.Link to="/play">
