@@ -66,7 +66,7 @@ const FormContainer = () => {
           </Form.Text>
         </Form.Label>
         <Form.Link to="/play">
-          <Form.Submit>START</Form.Submit>
+          <Form.Submit>Start</Form.Submit>
         </Form.Link>
       </Form.Base>
     </Form>

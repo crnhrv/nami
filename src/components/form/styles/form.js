@@ -110,6 +110,7 @@ export const Submit = styled.button`
   background-color: ${COLORS.light};
   font-size: 2rem;
   font-weight: bold;
+  text-transform: uppercase;
   color: ${COLORS.shadow};
 
   &:disabled {
