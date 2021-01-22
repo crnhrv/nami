@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: ${(props) => props.direction};
+  flex-direction: ${(props) => props.dir};
   align-items: center;
   gap: 10px;
   justify-content: center;
