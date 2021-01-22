@@ -12,29 +12,29 @@ import {
   Text,
   TooltipBase,
   TooltipLink,
-} from './styles/form';
+} from './styles/settings';
 
-const Form = ({ children, ...restProps }) => {
+const Settings = ({ children, ...restProps }) => {
   return <Container {...restProps}>{children}</Container>;
 };
 
-Form.Base = ({ children, ...restProps }) => {
+Settings.Base = ({ children, ...restProps }) => {
   return <Base {...restProps}>{children}</Base>;
 };
 
-Form.Title = ({ children, ...restProps }) => {
+Settings.Title = ({ children, ...restProps }) => {
   return <Title {...restProps}>{children}</Title>;
 };
 
-Form.Text = ({ children, ...restProps }) => {
+Settings.Text = ({ children, ...restProps }) => {
   return <Text {...restProps}>{children}</Text>;
 };
 
-Form.Link = ({ children, ...restProps }) => {
+Settings.Link = ({ children, ...restProps }) => {
   return <Link {...restProps}>{children}</Link>;
 };
 
-Form.Tooltip = ({ children, ...restProps }) => {
+Settings.Tooltip = ({ children, ...restProps }) => {
   return (
     <>
       <TooltipBase />
@@ -43,28 +43,28 @@ Form.Tooltip = ({ children, ...restProps }) => {
   );
 };
 
-Form.Label = ({ children, ...restProps }) => {
+Settings.Label = ({ children, ...restProps }) => {
   return <Label {...restProps}>{children}</Label>;
 };
 
-Form.LabelHead = ({ children, ...restProps }) => {
+Settings.LabelHead = ({ children, ...restProps }) => {
   return <LabelHead {...restProps}>{children}</LabelHead>;
 };
 
-Form.Input = ({ ...restProps }) => {
+Settings.Input = ({ ...restProps }) => {
   return <Input {...restProps}></Input>;
 };
 
-Form.Select = ({ children, ...restProps }) => {
+Settings.Select = ({ children, ...restProps }) => {
   return <Select {...restProps}>{children}</Select>;
 };
 
-Form.Option = ({ children, ...restProps }) => {
+Settings.Option = ({ children, ...restProps }) => {
   return <Option {...restProps}>{children}</Option>;
 };
 
-Form.Submit = ({ children, ...restProps }) => {
+Settings.Submit = ({ children, ...restProps }) => {
   return <Submit {...restProps}>{children}</Submit>;
 };
 
-export default Form;
+export default Settings;

@@ -22,17 +22,13 @@ export const Container = styled.section`
   background-color: ${COLORS.shadow};
   color: ${COLORS.accent};
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     position: initial;
     top: 0;
     left: 0;
     margin: 10px auto;
     width: 80%;
     transform: none;
-  }
-
-  @media (max-width: 810px) {
-    width: 80%;
   }
 `;
 
@@ -115,11 +111,11 @@ export const Button = styled.button`
     font-size: 1.2rem;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 720px) {
     margin: 10px auto;
     padding: ${(props) =>
       props.size === 'small' ? '0.2em 0.4em' : '0.3em 0.5em;'};
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
 `;
 
@@ -155,12 +151,8 @@ export const Title = styled.h2`
   text-align: center;
   font-size: 3em;
 
-  @media (max-width: 500px) {
-    font-size: 1.3rem;
-  }
-
-  @media (max-height: 720px) {
-    font-size: 1.5rem;
+  @media (max-width: 740px) {
+    font-size: 2rem;
   }
 `;
 

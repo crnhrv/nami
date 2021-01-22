@@ -1,7 +1,4 @@
-import './App.css';
-import HeaderContainer from './containers/header';
-import FormContainer from './containers/form';
-import GameContainer from './containers/game';
+import { Home, Play } from './pages/';
 import { Switch, Route } from 'react-router-dom';
 import { settingsContext } from './contexts/settings';
 import { GAME_SETTINGS } from './constants/game_settings';
@@ -25,13 +22,12 @@ const App = () => {
         setCommonWords,
       }}
     >
-      <HeaderContainer />
       <Switch>
         <Route exact path="/">
-          <FormContainer />
+          <Home />
         </Route>
         <Route path="/play">
-          <GameContainer />
+          <Play />
         </Route>
       </Switch>
     </settingsContext.Provider>
