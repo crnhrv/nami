@@ -38,7 +38,7 @@ export const Base = styled.form`
 
 export const Title = styled.h1`
   margin: 0 0 20px;
-  font-size: 3rem;
+  font-size: 2.5rem;
   text-align: center;
   text-transform: uppercase;
 
