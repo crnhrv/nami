@@ -4,7 +4,7 @@ import { COLORS } from '../../../constants/global_styles';
 export const Container = styled.section`
   position: fixed;
   top: 50%;
-  left: 50%;
+  left: 49.2%;
   display: ${(props) => props.di};
   flex-direction: ${(prop) => prop.dir};
   flex-wrap: wrap;

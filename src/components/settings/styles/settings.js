@@ -6,7 +6,7 @@ import ReactTooltip from 'react-tooltip';
 export const Container = styled.section`
   position: fixed;
   top: 50%;
-  left: 50%;
+  left: 49.2%;
   transform: translate(-50%, -50%);
   margin: auto;
   border: 3px solid ${COLORS.light};

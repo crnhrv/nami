@@ -18,7 +18,7 @@ export const Logo = styled.img`
 `;
 
 export const Title = styled.h1`
-  margin: 0 4px 0 10px;
+  margin: 0 0 0 10px;
   text-align: center;
   font-size: 6.75rem;
   color: #fff;
