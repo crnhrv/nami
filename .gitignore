@@ -27,3 +27,4 @@ src/lib/validated_dict.json
 src/lib/test.json
 src/lib/common_words.txt
 .eslintcache
+.vscode/settings.json
