@@ -20,8 +20,8 @@ export const Logo = styled.img`
 export const Title = styled.h1`
   margin: 0 4px 0 10px;
   text-align: center;
-  font-size: 4.75rem;
-  color: #00468b;
+  font-size: 6.75rem;
+  color: #fff;
 
   @media (max-width: 400px) {
     font-size: 1.55rem;
@@ -35,7 +35,7 @@ export const Title = styled.h1`
 export const SubTitle = styled.h3`
   margin: 15px 0 0 0;
   text-align: center;
-  font-size: 2.7rem;
+  font-size: 4.7rem;
   color: ${COLORS.light};
   font-family: 'Lobster', cursive;
 
