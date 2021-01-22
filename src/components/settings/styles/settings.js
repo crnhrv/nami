@@ -106,7 +106,6 @@ export const Option = styled.option``;
 
 export const Submit = styled.button`
   transition: all 0.2s ease;
-  margin: 10px 0;
   border: 0;
   border-radius: 4px;
   padding: 10px 20px;
