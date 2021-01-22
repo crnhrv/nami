@@ -10,6 +10,7 @@ import {
   Option,
   Link,
   Text,
+  Tooltip,
   TooltipBase,
   TooltipLink,
 } from './styles/settings';
@@ -35,11 +36,14 @@ Settings.Link = ({ children, ...restProps }) => {
 };
 
 Settings.Tooltip = ({ children, ...restProps }) => {
+  return <Tooltip {...restProps}>{children}</Tooltip>;
+};
+
+Settings.TooltipText = ({ children, ...restProps }) => {
   return (
-    <>
-      <TooltipBase />
-      <TooltipLink {...restProps}>{children}</TooltipLink>
-    </>
+    <TooltipLink {...restProps}>
+      {children} <TooltipBase />
+    </TooltipLink>
   );
 };
 

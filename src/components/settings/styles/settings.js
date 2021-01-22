@@ -11,7 +11,7 @@ export const Container = styled.section`
   margin: auto;
   border: 3px solid ${COLORS.light};
   border-radius: 5px;
-  max-width: 720px;
+  max-width: 320px;
   padding: 20px;
   background-color: ${COLORS.shadow};
   color: ${COLORS.accent};
@@ -48,28 +48,33 @@ export const Title = styled.h1`
 `;
 
 export const Text = styled.p`
-  display: flex;
-  gap: 3px;
-  align-items: center;
-  margin: 5px 0;
+  margin: 10px 0;
 `;
 
 export const Link = styled(RouterLink)`
   text-decoration: none;
 `;
 
+export const Tooltip = styled.div`
+  display: flex;
+  gap: 0.3rem;
+  align-items: baseline;
+  margin: 0 5px;
+`;
+
 export const TooltipBase = styled(ReactTooltip)``;
 
 export const TooltipLink = styled.span`
-  padding-bottom: -10px;
   cursor: help;
   color: ${COLORS.light};
+  font-size: 1.1rem;
 `;
 
 export const Label = styled.label`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
+  align-items: center;
 `;
 
 export const LabelHead = styled.p`

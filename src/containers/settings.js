@@ -58,12 +58,14 @@ const SettingsContainer = () => {
               checked={commonWords}
               type="checkbox"
             />
-            Only{' '}
-            <Settings.Tooltip data-tip="From the 20k most frequent words on Wikipedia">
-              Common
-            </Settings.Tooltip>{' '}
-            Words
           </Settings.Text>
+          <Settings.Tooltip>
+            Only
+            <Settings.TooltipText data-tip="From the 20k most frequent words on Wikipedia">
+              Common
+            </Settings.TooltipText>
+            Words
+          </Settings.Tooltip>
         </Settings.Label>
         <Settings.Link to="/play">
           <Settings.Submit>Start</Settings.Submit>

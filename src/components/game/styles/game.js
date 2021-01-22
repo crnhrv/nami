@@ -83,6 +83,7 @@ export const Input = styled.input`
 
 export const Button = styled.button`
   grid-column: 1/-1;
+  place-self: center;
   outline: 1px solid transparent;
   margin: 15px 10px;
   border: 0;
@@ -91,6 +92,7 @@ export const Button = styled.button`
     props.size === 'small' ? '0.4em 0.5em' : '0.6em 0.7em;'};
   background-color: ${COLORS.light};
   cursor: pointer;
+
   transition: all 0.2s ease;
   font-size: 1.5rem;
   font-weight: bold;
@@ -121,8 +123,8 @@ export const Button = styled.button`
 
 export const PlayButton = styled.button`
   border-style: inset;
-  border-width: 20px 0 20px 50px;
-  border-color: transparent transparent transparent ${COLORS.shadow};
+  border-width: 18px 0 18px 40px;
+  border-color: transparent transparent transparent #00468b;
   width: 0;
   height: 0;
   background-color: ${COLORS.shadow};
