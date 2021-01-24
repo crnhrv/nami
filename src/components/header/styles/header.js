@@ -21,7 +21,8 @@ export const Title = styled.h1`
   margin: 0 0 0 10px;
   text-align: center;
   font-size: 6.75rem;
-  color: #fff;
+  color: #efefef;
+  font-family: 'Ma Shan Zheng', cursive;
 
   @media (max-width: 620px) {
     font-size: 3.15rem;
@@ -34,6 +35,8 @@ export const SubTitle = styled.h3`
   font-size: 4.7rem;
   color: ${COLORS.light};
   font-family: 'Lobster Two', cursive;
+  font-weight: 700;
+  font-style: italic;
 
   @media (max-width: 620px) {
     font-size: 2.15rem;
