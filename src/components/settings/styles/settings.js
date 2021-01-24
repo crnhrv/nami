@@ -102,7 +102,7 @@ export const Select = styled.select`
   border-radius: 5px;
   width: 100%;
   padding: 0.5em;
-  background-color: white;
+  background-color: ${COLORS.accent};
   font-size: 1.1rem;
 
   @media (max-width: 360px) {

@@ -21,7 +21,7 @@ export const Title = styled.h1`
   margin: 0 0 0 10px;
   text-align: center;
   font-size: 6.75rem;
-  color: #efefef;
+  color: ${COLORS.accent};
   font-family: 'Ma Shan Zheng', cursive;
 
   @media (max-width: 620px) {
