@@ -55,7 +55,7 @@ export const Link = styled(RouterLink)`
 
 export const Tooltip = styled.div`
   display: flex;
-  gap: 0.3rem;
+  gap: 0.3em;
   align-items: baseline;
   margin: 0 0.5em;
 
@@ -84,7 +84,7 @@ export const Label = styled.label`
 `;
 
 export const LabelHead = styled.p`
-  margin: 0 0 0.75em 0;
+  margin: 0.4em 0 0.3em 0;
   font-size: 1.5rem;
 `;
 
