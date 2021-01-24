@@ -1,12 +1,14 @@
 import {
   Container,
+  VictoryContainer,
   Audio,
   Choices,
   Score,
   Button,
   PlayButton,
+  AgainButton,
   Count,
-  FlexContainer,
+  PlayButtonContainer,
   Input,
   Form,
   Text,
@@ -18,11 +20,7 @@ import {
 import { useState, useEffect, useRef } from 'react';
 
 const Game = ({ children, ...restProps }) => {
-  return (
-    <Container maxWidth="360px" di="flex" dir="column" {...restProps}>
-      {children}
-    </Container>
-  );
+  return <Container {...restProps}>{children}</Container>;
 };
 
 Game.Score = function GameScore({ pitch, children, ...restProps }) {
@@ -52,14 +50,16 @@ Game.Audio = function GameAudio({ audio, children, ...restProps }) {
 
   return (
     <Audio {...restProps}>
-      <FlexContainer>
+      <PlayButtonContainer>
         {tries > 0 && (
           <>
-            <Count>{tries} Plays</Count>
+            <Count>
+              {tries} {tries > 1 ? 'Plays' : 'Play'}
+            </Count>
             <PlayButton onClick={handleClick}></PlayButton>
           </>
         )}
-      </FlexContainer>
+      </PlayButtonContainer>
       {children}
     </Audio>
   );
@@ -173,7 +173,7 @@ Game.Choices = function GameChoices({
       break;
     case 'numericMulti':
       type = word.pitchChoices.map((pitch) => (
-        <Button size="small" key={pitch} onClick={() => handleMultiNum(pitch)}>
+        <Button key={pitch} onClick={() => handleMultiNum(pitch)}>
           {pitch}
         </Button>
       ));
@@ -214,12 +214,12 @@ Game.GameOver = function GameOver({
     })
     .reverse();
   return (
-    <Container maxWidth="720px" di="grid" dir="column" {...restProps}>
+    <VictoryContainer {...restProps}>
       <Title>How You Did</Title>
       {roundWords}
       {children}
-      <Button onClick={handleClick}>Play Again?</Button>
-    </Container>
+      <AgainButton onClick={handleClick}>Play Again?</AgainButton>
+    </VictoryContainer>
   );
 };
 

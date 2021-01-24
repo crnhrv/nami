@@ -6,9 +6,9 @@ export const Container = styled.div`
   display: flex;
   flex-direction: ${(props) => props.dir};
   align-items: center;
-  gap: 10px;
+  gap: 0.6em;
   justify-content: center;
-  padding: 5px;
+  padding: 0.4em;
   background-color: ${COLORS.shadow};
   border-bottom: 2px solid ${COLORS.dark};
 `;
@@ -23,11 +23,7 @@ export const Title = styled.h1`
   font-size: 6.75rem;
   color: #fff;
 
-  @media (max-width: 400px) {
-    font-size: 1.55rem;
-  }
-
-  @media (max-width: 600px) {
+  @media (max-width: 620px) {
     font-size: 3.15rem;
   }
 `;
@@ -37,18 +33,17 @@ export const SubTitle = styled.h3`
   text-align: center;
   font-size: 4.7rem;
   color: ${COLORS.light};
-  font-family: 'Lobster', cursive;
+  font-family: 'Lobster Two', cursive;
 
-  @media (max-width: 400px) {
-    font-size: 1.55rem;
-  }
-
-  @media (max-width: 600px) {
+  @media (max-width: 620px) {
     font-size: 2.15rem;
   }
 `;
 
 export const Link = styled(RouterLink)`
-  text-decoration: none;
   outline: 1px solid transparent;
+
+  &:hover {
+    text-decoration: none;
+  }
 `;

@@ -6,49 +6,47 @@ import ReactTooltip from 'react-tooltip';
 export const Container = styled.section`
   position: fixed;
   top: 50%;
-  left: 49.2%;
+  left: 49.5%;
   transform: translate(-50%, -50%);
-  margin: auto;
   border: 3px solid ${COLORS.light};
   border-radius: 5px;
-  max-width: 320px;
-  padding: 20px;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
+  max-width: 420px;
+  padding: 1em 2em;
   background-color: ${COLORS.shadow};
   color: ${COLORS.accent};
 
-  @media (max-width: 600px) {
-    margin-top: 10px;
-    width: 80%;
+  @media (max-width: 800px) {
+    width: 90%;
   }
 
-  @media (max-height: 650px) {
+  @media (max-height: 920px) {
     position: inherit;
     transform: none;
-    margin-top: 10px;
-    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 0.75rem;
   }
 `;
 
 export const Base = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 0.3em;
   width: 100%;
 `;
 
 export const Title = styled.h1`
-  margin: 0 0 20px;
   font-size: 2.5rem;
   text-align: center;
   text-transform: uppercase;
 
   @media (max-width: 360px) {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 `;
 
 export const Text = styled.p`
-  margin: 10px 0;
+  margin: 0.75em 0;
 `;
 
 export const Link = styled(RouterLink)`
@@ -59,7 +57,11 @@ export const Tooltip = styled.div`
   display: flex;
   gap: 0.3rem;
   align-items: baseline;
-  margin: 0 5px;
+  margin: 0 0.5em;
+
+  @media (max-width: 320px) {
+    font-size: 0.7rem;
+  }
 `;
 
 export const TooltipBase = styled(ReactTooltip)``;
@@ -67,7 +69,11 @@ export const TooltipBase = styled(ReactTooltip)``;
 export const TooltipLink = styled.span`
   cursor: help;
   color: ${COLORS.light};
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+
+  @media (max-width: 320px) {
+    font-size: 1rem;
+  }
 `;
 
 export const Label = styled.label`
@@ -78,22 +84,21 @@ export const Label = styled.label`
 `;
 
 export const LabelHead = styled.p`
-  flex-basis: 100%;
-  margin: 0 0 10px 0;
+  margin: 0 0 0.75em 0;
   font-size: 1.5rem;
 `;
 
 export const Input = styled.input`
   width: 20px;
   height: 20px;
-  padding: 10px;
+  padding: 1em;
   border: 2px solid #555;
 `;
 
 export const Select = styled.select`
   border-radius: 5px;
   width: 100%;
-  padding: 10px;
+  padding: 0.5em;
   background-color: white;
   font-size: 1.3rem;
 
@@ -108,7 +113,7 @@ export const Submit = styled.button`
   transition: all 0.2s ease;
   border: 0;
   border-radius: 4px;
-  padding: 10px 20px;
+  padding: 0.3em 0.9em;
   width: 100%;
   cursor: pointer;
   background-color: ${COLORS.light};
@@ -123,5 +128,10 @@ export const Submit = styled.button`
 
   &:hover {
     background-color: ${COLORS.accent};
+  }
+
+  @media (max-width: 320px) {
+    font-size: 1.3rem;
+    padding: 0.2em 0.5em;
   }
 `;
