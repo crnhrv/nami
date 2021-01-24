@@ -39,6 +39,7 @@ export const Title = styled.h1`
   font-size: 2rem;
   text-align: center;
   text-transform: uppercase;
+  letter-spacing: 2px;
 
   @media (max-width: 360px) {
     font-size: 2rem;
@@ -123,6 +124,7 @@ export const Submit = styled.button`
   font-size: 1.5rem;
   font-weight: bold;
   text-transform: uppercase;
+  letter-spacing: 2px;
   color: ${COLORS.shadow};
 
   &:disabled {
