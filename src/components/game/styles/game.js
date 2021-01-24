@@ -140,7 +140,7 @@ export const AgainButton = styled(Button)`
 export const PlayButton = styled.button`
   border-style: inset;
   border-width: 18px 0 18px 40px;
-  border-color: transparent transparent transparent #0a588b;
+  border-color: transparent transparent transparent ${COLORS.light};
   width: 0;
   height: 0;
   background-color: ${COLORS.shadow};
@@ -151,7 +151,7 @@ export const PlayButton = styled.button`
   }
 
   &:hover {
-    border-color: transparent transparent transparent ${COLORS.light};
+    border-color: transparent transparent transparent ${COLORS.accent};
   }
 
   @media (max-width: 400px) {
