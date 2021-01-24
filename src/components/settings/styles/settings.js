@@ -114,7 +114,7 @@ export const Select = styled.select`
 export const Option = styled.option``;
 
 export const Submit = styled.button`
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease;
   border: 0;
   border-radius: 4px;
   padding: 0.3em 0.9em;

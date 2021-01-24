@@ -9,7 +9,7 @@ export const Container = styled.section`
   flex-direction: column;
   flex-wrap: wrap;
   transform: translate(-50%, -50%);
-  transition: border 0.25s ease;
+  transition: border 0.32s ease;
   border: 3px solid ${(props) => (props.color ? props.color : COLORS.light)};
   border-radius: 5px;
   padding: 1em;
@@ -109,7 +109,7 @@ export const Button = styled.button`
   background-color: ${COLORS.light};
   cursor: pointer;
 
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease;
   font-size: 1.8rem;
   font-weight: bold;
   color: ${COLORS.shadow};
