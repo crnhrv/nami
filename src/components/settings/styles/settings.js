@@ -55,12 +55,15 @@ export const Link = styled(RouterLink)`
 
 export const Tooltip = styled.div`
   display: flex;
+  position: relative;
+  bottom: 0.2rem;
   gap: 0.3em;
   align-items: baseline;
   margin: 0 0.5em;
 
-  @media (max-width: 320px) {
-    font-size: 0.7rem;
+  @media (max-width: 300px) {
+    font-size: 0.8rem;
+    bottom: 0.3rem;
   }
 `;
 
@@ -69,10 +72,10 @@ export const TooltipBase = styled(ReactTooltip)``;
 export const TooltipLink = styled.span`
   cursor: help;
   color: ${COLORS.light};
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 
-  @media (max-width: 320px) {
-    font-size: 1rem;
+  @media (max-width: 300px) {
+    font-size: 0.9rem;
   }
 `;
 
