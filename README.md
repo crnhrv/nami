@@ -1,6 +1,6 @@
 # 波 - Japanese Pitch Accent Training
 
-[Try it here.](https://nami-pitch.herokuapp.com/)
+[Try it here.](https://nami-pitch.herokuapp.com/) (may take 1 minute or so to load due to free hosting limitations)
 
 If you know anything about Japanese pitch accent this game should be fairly self explanatory. Note that odaka (尾高) pitch accent words have been removed programmatically from the base dictionary to avoid ambiguity with heiban (平板) words.
 
